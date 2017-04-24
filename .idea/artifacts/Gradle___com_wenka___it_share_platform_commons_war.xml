@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : com.wenka : it_share_platform-commons.war">
+    <output-path>$PROJECT_DIR$/commons/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="it_share_platform-commons.war">
+      <element id="artifact" artifact-name="Gradle : com.wenka : it_share_platform-commons.war (exploded)" />
+    </root>
+  </artifact>
+</component>

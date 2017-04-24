@@ -1,0 +1,11 @@
+archivesBaseName = 'it_share_platform-web'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":domain")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

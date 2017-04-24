@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons/commons.iml" filepath="$PROJECT_DIR$/.idea/modules/commons/commons.iml" group="commons" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons/commons_main.iml" filepath="$PROJECT_DIR$/.idea/modules/commons/commons_main.iml" group="commons" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/domain.iml" group="domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/domain_main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/domain_main.iml" group="domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/domain_test.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/domain_test.iml" group="domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/it_share_platform.iml" filepath="$PROJECT_DIR$/.idea/modules/it_share_platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/it_share_platform_main.iml" filepath="$PROJECT_DIR$/.idea/modules/it_share_platform_main.iml" group="it_share_platform" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/it_share_platform_test.iml" filepath="$PROJECT_DIR$/.idea/modules/it_share_platform_test.iml" group="it_share_platform" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/web.iml" filepath="$PROJECT_DIR$/.idea/modules/web/web.iml" group="web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/web/web_main.iml" group="web" />
+    </modules>
+  </component>
+</project>

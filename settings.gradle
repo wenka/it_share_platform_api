@@ -1,0 +1,5 @@
+rootProject.name = 'it_share_platform'
+include 'domain'
+include 'web'
+include 'commons'
+

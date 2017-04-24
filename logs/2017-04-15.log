@@ -1,0 +1,258 @@
+2017-04-15 09:41:12.149 [main] INFO  EmbededTomcat - ==> AppBase: /home/wenka/IdeaProjects/it_share_platform/src/main/webapp
+2017-04-15 09:41:20.674 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2017-04-15 09:41:20.746 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Apr 15 09:41:20 CST 2017]; root of context hierarchy
+2017-04-15 09:41:20.776 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [context.xml]
+2017-04-15 09:41:26.637 [localhost-startStop-1] INFO  o.s.b.factory.config.PropertyPlaceholderConfigurer - Loading properties file from class path resource [jdbc.properties]
+2017-04-15 09:41:26.638 [localhost-startStop-1] INFO  o.s.b.factory.config.PropertyPlaceholderConfigurer - Loading properties file from class path resource [resources.properties]
+2017-04-15 09:41:27.232 [localhost-startStop-1] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.1.0.Final}
+2017-04-15 09:41:27.235 [localhost-startStop-1] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2017-04-15 09:41:27.237 [localhost-startStop-1] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2017-04-15 09:41:27.304 [localhost-startStop-1] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-15 09:41:27.328 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@3bdc4d2d
+2017-04-15 09:41:27.328 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@3bdc4d2d
+2017-04-15 09:41:27.329 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@3bdc4d2d
+2017-04-15 09:41:27.339 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@6a0304f0
+2017-04-15 09:41:27.341 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.TrueFalseType@49673376
+2017-04-15 09:41:27.341 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.YesNoType@5d0222db
+2017-04-15 09:41:27.343 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@5d1bed3b
+2017-04-15 09:41:27.344 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@5d1bed3b
+2017-04-15 09:41:27.344 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@5d1bed3b
+2017-04-15 09:41:27.345 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration character -> org.hibernate.type.CharacterType@1dbb43b5
+2017-04-15 09:41:27.345 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char -> org.hibernate.type.CharacterType@1dbb43b5
+2017-04-15 09:41:27.346 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@1dbb43b5
+2017-04-15 09:41:27.350 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@98ba197
+2017-04-15 09:41:27.350 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@98ba197
+2017-04-15 09:41:27.350 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.ShortType@98ba197
+2017-04-15 09:41:27.352 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.IntegerType@2a0cd9c
+2017-04-15 09:41:27.353 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration int -> org.hibernate.type.IntegerType@2a0cd9c
+2017-04-15 09:41:27.353 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@2a0cd9c
+2017-04-15 09:41:27.356 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@c3b28e7
+2017-04-15 09:41:27.358 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@c3b28e7
+2017-04-15 09:41:27.363 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.LongType@c3b28e7
+2017-04-15 09:41:27.366 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@61053d9a
+2017-04-15 09:41:27.367 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@61053d9a
+2017-04-15 09:41:27.367 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.FloatType@61053d9a
+2017-04-15 09:41:27.369 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@215fcb40
+2017-04-15 09:41:27.369 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@215fcb40
+2017-04-15 09:41:27.369 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@215fcb40
+2017-04-15 09:41:27.371 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@6f50bed
+2017-04-15 09:41:27.378 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@6f50bed
+2017-04-15 09:41:27.380 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BigIntegerType@79d497c1
+2017-04-15 09:41:27.380 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@79d497c1
+2017-04-15 09:41:27.381 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration string -> org.hibernate.type.StringType@b0253dc
+2017-04-15 09:41:27.381 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.StringType@b0253dc
+2017-04-15 09:41:27.382 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.StringNVarcharType@7fb5c4b6
+2017-04-15 09:41:27.383 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@dc3b321
+2017-04-15 09:41:27.385 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration url -> org.hibernate.type.UrlType@4745fe33
+2017-04-15 09:41:27.385 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.UrlType@4745fe33
+2017-04-15 09:41:27.387 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration date -> org.hibernate.type.DateType@656d6a
+2017-04-15 09:41:27.389 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.DateType@656d6a
+2017-04-15 09:41:27.391 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration time -> org.hibernate.type.TimeType@51420760
+2017-04-15 09:41:27.392 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.TimeType@51420760
+2017-04-15 09:41:27.393 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.TimestampType@5cdca264
+2017-04-15 09:41:27.394 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@5cdca264
+2017-04-15 09:41:27.394 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.TimestampType@5cdca264
+2017-04-15 09:41:27.396 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@71eeeb13
+2017-04-15 09:41:27.397 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.CalendarType@74b01f2e
+2017-04-15 09:41:27.397 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@74b01f2e
+2017-04-15 09:41:27.397 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@74b01f2e
+2017-04-15 09:41:27.398 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@6fdf7b0c
+2017-04-15 09:41:27.399 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.LocaleType@56a23d71
+2017-04-15 09:41:27.399 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@56a23d71
+2017-04-15 09:41:27.400 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.CurrencyType@50949f82
+2017-04-15 09:41:27.402 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@50949f82
+2017-04-15 09:41:27.403 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.TimeZoneType@187420b2
+2017-04-15 09:41:27.405 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@187420b2
+2017-04-15 09:41:27.406 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration class -> org.hibernate.type.ClassType@7545e6e
+2017-04-15 09:41:27.407 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.ClassType@7545e6e
+2017-04-15 09:41:27.409 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@4ae4d7ab
+2017-04-15 09:41:27.409 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@4ae4d7ab
+2017-04-15 09:41:27.410 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@6c211003
+2017-04-15 09:41:27.412 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BinaryType@18557885
+2017-04-15 09:41:27.413 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BinaryType@18557885
+2017-04-15 09:41:27.413 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BinaryType@18557885
+2017-04-15 09:41:27.414 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@21df5d1b
+2017-04-15 09:41:27.415 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@21df5d1b
+2017-04-15 09:41:27.415 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@21df5d1b
+2017-04-15 09:41:27.418 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration image -> org.hibernate.type.ImageType@6c500f99
+2017-04-15 09:41:27.419 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.CharArrayType@44eaae77
+2017-04-15 09:41:27.419 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.CharArrayType@44eaae77
+2017-04-15 09:41:27.420 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.CharArrayType@44eaae77
+2017-04-15 09:41:27.421 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@ac4b6a5
+2017-04-15 09:41:27.421 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@ac4b6a5
+2017-04-15 09:41:27.423 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@ac4b6a5
+2017-04-15 09:41:27.425 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration text -> org.hibernate.type.TextType@e6920e9
+2017-04-15 09:41:27.426 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.NTextType@4d8ae33
+2017-04-15 09:41:27.431 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BlobType@560a64a3
+2017-04-15 09:41:27.432 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@560a64a3
+2017-04-15 09:41:27.432 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@3d904926
+2017-04-15 09:41:27.484 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.ClobType@72ba2b8a
+2017-04-15 09:41:27.487 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@72ba2b8a
+2017-04-15 09:41:27.491 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.NClobType@12b7f790
+2017-04-15 09:41:27.491 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@12b7f790
+2017-04-15 09:41:27.491 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@b12b5ca
+2017-04-15 09:41:27.492 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@22050747
+2017-04-15 09:41:27.508 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.SerializableType@5c1ad218
+2017-04-15 09:41:27.517 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration object -> org.hibernate.type.ObjectType@2f4254bd
+2017-04-15 09:41:27.519 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@2f4254bd
+2017-04-15 09:41:27.520 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@de6ad06
+2017-04-15 09:41:27.520 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@303cf7bb
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@280eedc8
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@7af21acb
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@4244160e
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@1512a0d2
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@4aad6f15
+2017-04-15 09:41:27.523 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@20e310c9
+2017-04-15 09:41:27.742 [localhost-startStop-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2017-04-15 09:41:27.770 [localhost-startStop-1] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2017-04-15 09:41:28.016 [localhost-startStop-1] INFO  o.h.engine.jdbc.env.internal.LobCreatorBuilderImpl - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-04-15 09:41:28.025 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration pg-uuid -> org.hibernate.type.PostgresUUIDType@57d631b1
+2017-04-15 09:41:28.025 [localhost-startStop-1] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.PostgresUUIDType@57d631b1
+2017-04-15 09:41:28.025 [localhost-startStop-1] INFO  org.hibernate.type.BasicTypeRegistry - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@4ae4d7ab
+2017-04-15 09:41:28.490 [localhost-startStop-1] TRACE org.hibernate.type.TypeFactory - Scoping types to session factory org.hibernate.internal.SessionFactoryImpl@190d1066
+2017-04-15 09:41:28.528 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.2.4.Final
+2017-04-15 09:41:30.314 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 9639 ms
+2017-04-15 09:41:30.362 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2017-04-15 09:41:30.367 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'dispatcherServlet-servlet': startup date [Sat Apr 15 09:41:30 CST 2017]; parent: Root WebApplicationContext
+2017-04-15 09:41:30.368 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [mvc.xml]
+2017-04-15 09:41:31.065 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/login]}" onto public com.wenka.domain.model.User com.wenka.web.controller.UserController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-04-15 09:41:31.068 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/logout]}" onto public void com.wenka.web.controller.UserController.logout(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-04-15 09:41:31.068 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/{id}],methods=[GET]}" onto public com.wenka.domain.model.User com.wenka.web.controller.UserController.get(java.lang.String)
+2017-04-15 09:41:31.074 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/leaveMessage/save],methods=[POST]}" onto public void com.wenka.web.controller.LeaveMessageController.saveLeaveMessage(com.wenka.domain.model.LeaveMessage)
+2017-04-15 09:41:31.074 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/leaveMessage/],methods=[GET]}" onto public com.wenka.commons.util.Pagination com.wenka.web.controller.LeaveMessageController.get(java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-04-15 09:41:31.079 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/uploads],methods=[POST]}" onto public java.util.Set<com.wenka.domain.model.Attachment> com.wenka.web.controller.AttachmentController.handleFormUpload(org.springframework.web.multipart.MultipartHttpServletRequest)
+2017-04-15 09:41:31.319 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'dispatcherServlet-servlet': startup date [Sat Apr 15 09:41:30 CST 2017]; parent: Root WebApplicationContext
+2017-04-15 09:41:31.371 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'dispatcherServlet-servlet': startup date [Sat Apr 15 09:41:30 CST 2017]; parent: Root WebApplicationContext
+2017-04-15 09:41:31.505 [localhost-startStop-1] WARN  o.s.w.servlet.view.ContentNegotiatingViewResolver - Did not find any ViewResolvers to delegate to; please configure them using the 'viewResolvers' property on the ContentNegotiatingViewResolver
+2017-04-15 09:41:31.619 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 1257 ms
+2017-04-15 09:42:38.122 [http-nio-8081-exec-1] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/it/login] in DispatcherServlet with name 'dispatcherServlet'
+2017-04-15 09:43:09.785 [http-nio-8081-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        this_.ID as ID1_8_1_,
+        this_.VER as VER2_8_1_,
+        this_.account as account3_8_1_,
+        this_.address as address4_8_1_,
+        this_.attachment_id as attachm15_8_1_,
+        this_.create_time as create_t5_8_1_,
+        this_.email as email6_8_1_,
+        this_.kind_code as kind_cod7_8_1_,
+        this_.name_ as name_8_8_1_,
+        this_.password as password9_8_1_,
+        this_.remark as remark10_8_1_,
+        this_.spell as spell11_8_1_,
+        this_.state as state12_8_1_,
+        this_.tel as tel13_8_1_,
+        this_.update_time as update_14_8_1_,
+        attachment2_.ID as ID1_0_0_,
+        attachment2_.content_type as content_2_0_0_,
+        attachment2_.create_time as create_t3_0_0_,
+        attachment2_.origina_name as origina_4_0_0_,
+        attachment2_.real_name as real_nam5_0_0_ 
+    from
+        users this_ 
+    left outer join
+        attachment attachment2_ 
+            on this_.attachment_id=attachment2_.ID 
+    where
+        this_.account=? 
+        and this_.password=? 
+        and this_.state<>?
+2017-04-15 09:43:09.798 [http-nio-8081-exec-2] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2017-04-15 09:43:09.799 [http-nio-8081-exec-2] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [2] as [VARCHAR] - [356a192b7913b04c54574d18c28d46e6395428ab]
+2017-04-15 09:43:09.800 [http-nio-8081-exec-2] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [3] as [INTEGER] - [-1]
+2017-04-15 09:43:09.835 [http-nio-8081-exec-2] INFO  com.wenka.commons.web.handler.RestExceptionHandler - ==> 异常类型: java.lang.RuntimeException
+2017-04-15 09:43:16.866 [http-nio-8081-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        this_.ID as ID1_8_1_,
+        this_.VER as VER2_8_1_,
+        this_.account as account3_8_1_,
+        this_.address as address4_8_1_,
+        this_.attachment_id as attachm15_8_1_,
+        this_.create_time as create_t5_8_1_,
+        this_.email as email6_8_1_,
+        this_.kind_code as kind_cod7_8_1_,
+        this_.name_ as name_8_8_1_,
+        this_.password as password9_8_1_,
+        this_.remark as remark10_8_1_,
+        this_.spell as spell11_8_1_,
+        this_.state as state12_8_1_,
+        this_.tel as tel13_8_1_,
+        this_.update_time as update_14_8_1_,
+        attachment2_.ID as ID1_0_0_,
+        attachment2_.content_type as content_2_0_0_,
+        attachment2_.create_time as create_t3_0_0_,
+        attachment2_.origina_name as origina_4_0_0_,
+        attachment2_.real_name as real_nam5_0_0_ 
+    from
+        users this_ 
+    left outer join
+        attachment attachment2_ 
+            on this_.attachment_id=attachment2_.ID 
+    where
+        this_.account=? 
+        and this_.password=? 
+        and this_.state<>?
+2017-04-15 09:43:16.867 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [admin]
+2017-04-15 09:43:16.867 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [2] as [VARCHAR] - [40bd001563085fc35165329ea1ff5c5ecbdbbeef]
+2017-04-15 09:43:16.867 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [3] as [INTEGER] - [-1]
+2017-04-15 09:43:16.871 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([ID1_0_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.872 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([ID1_8_1_] : [VARCHAR]) - [0047a5fd-fd5b-479c-9e6b-392a705be16b]
+2017-04-15 09:43:16.882 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([VER2_8_1_] : [INTEGER]) - [0]
+2017-04-15 09:43:16.882 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([account3_8_1_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.882 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([address4_8_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.883 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([attachm15_8_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.884 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([create_t5_8_1_] : [TIMESTAMP]) - [2017-04-15 09:40:16.813]
+2017-04-15 09:43:16.884 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([email6_8_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.884 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([kind_cod7_8_1_] : [INTEGER]) - [10]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([name_8_8_1_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([password9_8_1_] : [VARCHAR]) - [40bd001563085fc35165329ea1ff5c5ecbdbbeef]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([remark10_8_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([spell11_8_1_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([state12_8_1_] : [INTEGER]) - [1]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([tel13_8_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.885 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([update_14_8_1_] : [TIMESTAMP]) - [2017-04-15 09:40:37.161]
+2017-04-15 09:43:16.902 [http-nio-8081-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        user0_.ID as ID1_8_0_,
+        user0_.VER as VER2_8_0_,
+        user0_.account as account3_8_0_,
+        user0_.address as address4_8_0_,
+        user0_.attachment_id as attachm15_8_0_,
+        user0_.create_time as create_t5_8_0_,
+        user0_.email as email6_8_0_,
+        user0_.kind_code as kind_cod7_8_0_,
+        user0_.name_ as name_8_8_0_,
+        user0_.password as password9_8_0_,
+        user0_.remark as remark10_8_0_,
+        user0_.spell as spell11_8_0_,
+        user0_.state as state12_8_0_,
+        user0_.tel as tel13_8_0_,
+        user0_.update_time as update_14_8_0_,
+        attachment1_.ID as ID1_0_1_,
+        attachment1_.content_type as content_2_0_1_,
+        attachment1_.create_time as create_t3_0_1_,
+        attachment1_.origina_name as origina_4_0_1_,
+        attachment1_.real_name as real_nam5_0_1_ 
+    from
+        users user0_ 
+    left outer join
+        attachment attachment1_ 
+            on user0_.attachment_id=attachment1_.ID 
+    where
+        user0_.ID=?
+2017-04-15 09:43:16.903 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [0047a5fd-fd5b-479c-9e6b-392a705be16b]
+2017-04-15 09:43:16.916 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([ID1_0_1_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([VER2_8_0_] : [INTEGER]) - [0]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([account3_8_0_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([address4_8_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([attachm15_8_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([create_t5_8_0_] : [TIMESTAMP]) - [2017-04-15 09:40:16.813]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([email6_8_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([kind_cod7_8_0_] : [INTEGER]) - [10]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([name_8_8_0_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([password9_8_0_] : [VARCHAR]) - [40bd001563085fc35165329ea1ff5c5ecbdbbeef]
+2017-04-15 09:43:16.917 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([remark10_8_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.918 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([spell11_8_0_] : [VARCHAR]) - [admin]
+2017-04-15 09:43:16.918 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([state12_8_0_] : [INTEGER]) - [1]
+2017-04-15 09:43:16.918 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([tel13_8_0_] : [VARCHAR]) - [null]
+2017-04-15 09:43:16.918 [http-nio-8081-exec-3] TRACE org.hibernate.type.descriptor.sql.BasicExtractor - extracted value ([update_14_8_0_] : [TIMESTAMP]) - [2017-04-15 09:40:37.161]
