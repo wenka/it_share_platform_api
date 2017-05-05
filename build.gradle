@@ -10,12 +10,14 @@ subprojects {
 
     repositories {
         maven {
-            url "http://192.168.1.100:8091/nexus/content/groups/public"
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
+
         maven {
-            url "http://192.168.1.100:8091/nexus/content/repositories/yunland"
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
-        jcenter()
+
+//        jcenter()
     }
 
     dependencies {
@@ -85,11 +87,17 @@ subprojects {
     }
 }
 repositories {
+//    maven {
+//        url "http://192.168.1.100:8091/nexus/content/groups/public"
+//    }
+//    maven {
+//        url "http://192.168.1.100:8091/nexus/content/repositories/yunland"
+//    }
     maven {
-        url "http://192.168.1.100:8091/nexus/content/groups/public"
+        url "http://maven.oschina.net/content/groups/public/" //开源中国的maven镜像
     }
     maven {
-        url "http://192.168.1.100:8091/nexus/content/repositories/yunland"
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
     jcenter()
 }
