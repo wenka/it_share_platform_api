@@ -6,6 +6,9 @@ apply plugin: 'java'
 sourceCompatibility = 1.5
 
 repositories {
+    maven {
+        url "https://oss.sonatype.org/service/local/"
+    }
     mavenCentral()
 }
 
