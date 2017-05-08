@@ -15,11 +15,11 @@ import java.util.Date;
 public class User extends AbstractVersionEntity {
 
     @Column(name = "account", nullable = false)
-    @Length(min = 10, max = 36)
+    @Length(min = 5, max = 36)
     private String account; //账户
 
     @Column(name = "password", nullable = false)
-    @Length(min = 6, max = 36)
+    @Length(min = 6, max = 50)
     private String password;//密码
 
     @Column(name = "name_", nullable = false)
