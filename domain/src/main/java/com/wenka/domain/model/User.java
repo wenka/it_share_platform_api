@@ -51,9 +51,10 @@ public class User extends AbstractVersionEntity {
     @Column(name = "remark")
     private String remark; //备注
 
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "update_time", nullable = false)
-    private Date updateTime; //更新时间
+    public enum Gender{
+        male,female,none
+    }
+    private Gender gender; //性别
 
     @OneToOne
     @JoinColumn(name = "attachment_id")
@@ -147,14 +148,6 @@ public class User extends AbstractVersionEntity {
         this.remark = remark;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public Attachment getAttachment() {
         return attachment;
     }
@@ -162,4 +155,13 @@ public class User extends AbstractVersionEntity {
     public void setAttachment(Attachment attachment) {
         this.attachment = attachment;
     }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
 }
