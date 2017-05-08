@@ -10,6 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.UUID;
 
 /**
  * @author 文卡<wkwenka@gmail.com>  on 17-4-5.
@@ -127,5 +128,15 @@ public abstract class SecureCoder {
         }
 
         return result;
+    }
+
+    public static void main(String[] args){
+        try {
+            String s = sha1("123");
+            String s1 = sha1("40bd001563085fc35165329ea1ff5c5ecbdbbeef");
+            System.out.println(UUID.randomUUID().toString());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 }
