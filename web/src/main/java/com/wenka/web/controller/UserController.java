@@ -1,5 +1,6 @@
 package com.wenka.web.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.wenka.commons.web.AuthNotRequired;
 import com.wenka.commons.web.AuthToken;
 import com.wenka.domain.model.User;
@@ -7,10 +8,7 @@ import com.wenka.domain.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +27,26 @@ public class UserController {
 
     @Value("${token.timeout}")
     private String tokenTimeout;
+
+    /**
+     * 新增或者修改用户
+     *
+     * @param user
+     */
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public void save(@RequestBody User user) {
+        this.userService.saveOrUpdate(user);
+    }
+
+    /**
+     * 注销用户
+     *
+     * @param id
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable String id) {
+        this.userService.delete(id);
+    }
 
     /**
      * 获取用户
@@ -82,8 +100,8 @@ public class UserController {
     @RequestMapping({"/logout"})
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         Object o = request.getAttribute("authToken");
-        if(o != null) {
-            AuthToken authToken = (AuthToken)o;
+        if (o != null) {
+            AuthToken authToken = (AuthToken) o;
             authToken.setTimeout(-1);
             request.setAttribute("authToken", authToken);
             Cookie var10 = authToken.toCookie();
@@ -91,12 +109,12 @@ public class UserController {
             response.addCookie(var10);
         } else {
             Cookie[] cookies = request.getCookies();
-            if(cookies != null) {
+            if (cookies != null) {
                 Cookie[] clean = cookies;
                 int length = cookies.length;
-                for(int i = 0; i < length; ++i) {
+                for (int i = 0; i < length; ++i) {
                     Cookie cookie = clean[i];
-                    if("m-at-id".equals(cookie.getName())) {
+                    if ("m-at-id".equals(cookie.getName())) {
                         cookie.setValue(null);
                         cookie.setMaxAge(0);
                         cookie.setPath("/");
@@ -104,7 +122,23 @@ public class UserController {
                     }
                 }
             }
-
         }
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param id
+     * @param password
+     */
+    @RequestMapping(value = "/updatePswd", method = RequestMethod.GET)
+    public void updatePswd(@RequestParam(required = true) String id,
+                           @RequestParam(required = true) String password) {
+        String pswd = StringUtils.trimToNull(password);
+
+        if (StringUtils.isBlank(pswd)){
+            throw new RuntimeException("密码不能为空");
+        }
+        this.userService.updatePswd(id,pswd);
     }
 }

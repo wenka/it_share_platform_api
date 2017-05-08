@@ -135,6 +135,13 @@ public class UserService {
         if (user == null) {
             throw new RuntimeException("用户不存在");
         }
+
+        try {
+            password = SecureCoder.sha1(password);
+        } catch (NoSuchAlgorithmException e) {
+            this.logger.info(e.getMessage());
+            throw new RuntimeException("密码无法解析");
+        }
         user.setPassword(password);
         this.userDao.update(user);
     }
