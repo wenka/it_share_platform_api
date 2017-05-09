@@ -1,8 +1,10 @@
 package com.wenka.domain.service;
 
 import com.wenka.domain.dao.CategoryDao;
+import com.wenka.domain.dao.UserDao;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.model.HqlArgs;
+import com.wenka.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,24 @@ public class CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 新增或者修改
      *
      * @param category
      */
     public void saveOrUpdate(Category category) {
+        User creator = category.getCreator();
+        if (creator == null) {
+            throw new RuntimeException("不能识别当前用户");
+        }
+        User user = userService.get(creator.getId());
+        if (user == null) {
+            throw new RuntimeException("不能识别当前用户");
+        }
+        category.setCreator(user);
         this.categoryDao.saveOrUpdate(category);
     }
 
@@ -104,5 +118,17 @@ public class CategoryService {
         HqlArgs hqlArgs = genHqlArgs(param, parentId);
         String hql = "select c " + hqlArgs.getHql() + " order by c.sort desc";
         return categoryDao.findByNamedParam(hql, startIndex, length, hqlArgs.getArgs());
+    }
+
+    /**
+     * 通过用户查询所拥有的类别
+     *
+     * @param userId
+     * @return
+     */
+    public List<Category> getCategoryListByUser(String userId) {
+        String hql = "FROM Category WHERE creator.id = ? AND state <> 0";
+        List<Category> categories = categoryDao.find(hql, userId);
+        return categories;
     }
 }

@@ -27,6 +27,17 @@ public class Category extends AbstractVersionEntity {
 
     private CategoryType categoryType;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "creator_id")
+    @JSONField(serialize = false)
+    private User creator;
+
+    @Transient
+    private String creatorName;
+
+    @Transient
+    private String creatorId;
+
     @Transient
     private String portraitId;
 
@@ -49,7 +60,7 @@ public class Category extends AbstractVersionEntity {
     private Set<Category> children;
 
     @Column(nullable = false)
-    private Integer sort;
+    private Integer sort = Integer.valueOf(0);
 
     @Transient
     private Integer childrenCount = Integer.valueOf(0);
@@ -167,4 +178,29 @@ public class Category extends AbstractVersionEntity {
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
     }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
 }

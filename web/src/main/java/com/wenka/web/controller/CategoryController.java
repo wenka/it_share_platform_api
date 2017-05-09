@@ -3,15 +3,18 @@ package com.wenka.web.controller;
 import com.wenka.commons.util.Pagination;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.service.CategoryService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author 文卡<wkwenka@gmail.com>  on 17-4-15.
  */
 @RestController
-@Repository("/category")
+@RequestMapping("/category")
 public class CategoryController extends BaseController {
 
     @Autowired
@@ -67,5 +70,21 @@ public class CategoryController extends BaseController {
         pagination.setCount(categoryService.getResultSize(param, parentId));
         pagination.setRecords(categoryService.getResultInfos(param, parentId, startIdx, length));
         return pagination;
+    }
+
+    /**
+     * 通过用户查看其类别
+     *
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/getByUser",method = RequestMethod.GET)
+    public List<Category> getListByUser(@RequestParam(required = false) String userId) {
+        userId = StringUtils.trimToEmpty(userId);
+        if (StringUtils.isBlank(userId)){
+            userId = this.currentUserId;
+        }
+        List<Category> categoryListByUser = categoryService.getCategoryListByUser(userId);
+        return categoryListByUser;
     }
 }
