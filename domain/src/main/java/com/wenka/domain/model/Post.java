@@ -28,7 +28,7 @@ public class Post extends AbstractVersionEntity {
     }
 
     public enum PostType {
-        文章, 评论
+        博客,头条,提问, 评论
     }
 
     @Enumerated(value = EnumType.STRING)

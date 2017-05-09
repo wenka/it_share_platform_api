@@ -1,8 +1,10 @@
 package com.wenka.domain.service;
 
 import com.wenka.domain.dao.PostDao;
+import com.wenka.domain.model.Category;
 import com.wenka.domain.model.HqlArgs;
 import com.wenka.domain.model.Post;
+import javafx.geometry.Pos;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author 文卡<wkwenka@gmail.com>  on 17-4-5.
@@ -20,6 +23,9 @@ public class PostService {
     @Autowired
     private PostDao postDao;
 
+    @Autowired
+    private CategoryService categoryService;
+
     /**
      * 新增修改文章
      *
@@ -28,9 +34,7 @@ public class PostService {
     public void saveOrUpdate(Post post) {
 
         if (post.getAttachmentIds() != null) {
-
             post = postDao.getAttachments(post);
-
         }
 
         postDao.saveOrUpdate(post);
@@ -60,7 +64,7 @@ public class PostService {
         postDao.update(post);
     }
 
-    private HqlArgs genHqlArgs(String param, List<String> categoryIds, List<Integer> states) {
+    private HqlArgs genHqlArgs(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states) {
         param = StringUtils.trimToEmpty(param);
 
         Map<String, Object> args = new HashMap<String, Object>();
@@ -91,8 +95,11 @@ public class PostService {
             }
         }
 
-        hql += " and p.postType=:postType";
-        args.put("postType", Post.PostType.文章);
+        if (StringUtils.isNoneBlank(postType.toString())) {
+            hql += " and p.postType=:postType";
+            args.put("postType", postType);
+        }
+
 
         return new HqlArgs(hql, args);
 
@@ -108,14 +115,14 @@ public class PostService {
      * @param rows
      * @return
      */
-    public List<Post> getList(String param, List<String> categoryIds, List<Integer> states, Integer startIndex, Integer rows) {
-        HqlArgs hqlArgs = genHqlArgs(param, categoryIds, states);
+    public List<Post> getList(Post.PostType postType,String param, List<String> categoryIds, List<Integer> states, Integer startIndex, Integer rows) {
+        HqlArgs hqlArgs = genHqlArgs(postType,param, categoryIds, states);
         List<Post> list = postDao.findByNamedParam(hqlArgs.getHql(), startIndex, rows, hqlArgs.getArgs());
         return list;
     }
 
-    public int getListSize(String param, List<String> categoryIds, List<Integer> states) {
-        HqlArgs hqlArgs = genHqlArgs(param, categoryIds, states);
+    public int getListSize(Post.PostType postType,String param, List<String> categoryIds, List<Integer> states) {
+        HqlArgs hqlArgs = genHqlArgs(postType,param, categoryIds, states);
         List<Post> list = postDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs());
         return list.size();
     }

@@ -25,6 +25,8 @@ public class PostController extends BaseController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public void saveOrUpdatePost(@RequestBody Post post) {
+        post.setCreator(this.currentUser);
+        post.setAuthor(this.currentUser.getName());
         postService.saveOrUpdate(post);
     }
 
@@ -57,18 +59,19 @@ public class PostController extends BaseController {
      * @param states
      * @param page
      * @param length
-     * @return
+     * @retur
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Pagination list(@RequestParam(required = false) String param,
+    public Pagination list(@RequestParam(required = true) Post.PostType postType,
+                           @RequestParam(required = false) String param,
                            @RequestParam(required = false) List<String> categoryIds,
                            @RequestParam(required = false) List<Integer> states,
                            @RequestParam(required = false) Integer page,
                            @RequestParam(required = false) Integer length) {
         Pagination<Post> pagination = new Pagination<Post>(page, length);
         Integer startIdx = pagination.getStartIdx();
-        pagination.setCount(postService.getListSize(param, categoryIds, states));
-        pagination.setRecords(postService.getList(param, categoryIds, states, startIdx, length));
+        pagination.setCount(postService.getListSize(postType,param, categoryIds, states));
+        pagination.setRecords(postService.getList(postType,param, categoryIds, states, startIdx, length));
         return pagination;
     }
 }
