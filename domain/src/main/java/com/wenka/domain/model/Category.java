@@ -3,6 +3,7 @@ package com.wenka.domain.model;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -13,6 +14,14 @@ import java.util.Set;
 @Table(name = "category")
 public class Category extends AbstractVersionEntity {
 
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public enum CategoryType {
         类别, 栏目
@@ -37,6 +46,9 @@ public class Category extends AbstractVersionEntity {
 
     @Transient
     private String creatorId;
+
+    @Column(name = "create_time",nullable = false)
+    private Date createTime = new Date();
 
     @Transient
     private String portraitId;

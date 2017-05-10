@@ -33,6 +33,14 @@ public class PostService {
      */
     public void saveOrUpdate(Post post) {
 
+        Category category = post.getCategory();
+        if (category != null) {
+            Category _category = categoryService.get(category.getId());
+            post.setCategory(_category);
+        } else {
+            post.setCategory(null);
+        }
+
         if (post.getAttachmentIds() != null) {
             post = postDao.getAttachments(post);
         }
@@ -64,8 +72,9 @@ public class PostService {
         postDao.update(post);
     }
 
-    private HqlArgs genHqlArgs(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states) {
+    private HqlArgs genHqlArgs(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
         param = StringUtils.trimToEmpty(param);
+        userId = StringUtils.trimToEmpty(userId);
 
         Map<String, Object> args = new HashMap<String, Object>();
         String hql = "from Post p where 1=1";
@@ -93,11 +102,18 @@ public class PostService {
                 hql += " and p.state in :states";
                 args.put("states", states);
             }
+        } else {
+            hql += " and p.state <> -1";
         }
 
         if (StringUtils.isNoneBlank(postType.toString())) {
             hql += " and p.postType=:postType";
             args.put("postType", postType);
+        }
+
+        if (StringUtils.isNotBlank(userId)) {
+            hql += " and p.creator.id = :userId";
+            args.put("userId", userId);
         }
 
 
@@ -115,15 +131,31 @@ public class PostService {
      * @param rows
      * @return
      */
-    public List<Post> getList(Post.PostType postType,String param, List<String> categoryIds, List<Integer> states, Integer startIndex, Integer rows) {
-        HqlArgs hqlArgs = genHqlArgs(postType,param, categoryIds, states);
+    public List<Post> getList(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, Integer startIndex, Integer rows) {
+        HqlArgs hqlArgs = genHqlArgs(postType, param, categoryIds, states, null);
         List<Post> list = postDao.findByNamedParam(hqlArgs.getHql(), startIndex, rows, hqlArgs.getArgs());
         return list;
     }
 
-    public int getListSize(Post.PostType postType,String param, List<String> categoryIds, List<Integer> states) {
-        HqlArgs hqlArgs = genHqlArgs(postType,param, categoryIds, states);
+    public int getListSize(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states) {
+        HqlArgs hqlArgs = genHqlArgs(postType, param, categoryIds, states, null);
         List<Post> list = postDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs());
         return list.size();
+    }
+
+    /**
+     * 条件查询
+     *
+     * @param postType
+     * @param param
+     * @param categoryIds
+     * @param states
+     * @param userId
+     * @return
+     */
+    public List<Post> getList(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
+        HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
+        List<Post> byNamedParam = postDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs());
+        return byNamedParam;
     }
 }

@@ -44,14 +44,15 @@ public class CategoryService {
     }
 
     /**
-     * 标记删除
+     * 更改状态
+     * 标记删除/设为禁用/启用
      *
      * @param id
      */
-    public void delete(String id) {
+    public void delete(String id, Integer state) {
         Category category = this.categoryDao.get(id);
         if (category != null) {
-            category.setState(Integer.valueOf(-1));
+            category.setState(state);
             this.categoryDao.update(category);
         }
     }
@@ -116,7 +117,7 @@ public class CategoryService {
      */
     public List<Category> getResultInfos(String param, String parentId, Integer startIndex, Integer length) {
         HqlArgs hqlArgs = genHqlArgs(param, parentId);
-        String hql = "select c " + hqlArgs.getHql() + " order by c.sort desc";
+        String hql = "select c " + hqlArgs.getHql() + " order by c.sort desc,createTime desc";
         return categoryDao.findByNamedParam(hql, startIndex, length, hqlArgs.getArgs());
     }
 
@@ -127,7 +128,7 @@ public class CategoryService {
      * @return
      */
     public List<Category> getCategoryListByUser(String userId) {
-        String hql = "FROM Category WHERE creator.id = ? AND state <> 0";
+        String hql = "FROM Category WHERE creator.id = ? AND state <> -1 ORDER BY createTime DESC";
         List<Category> categories = categoryDao.find(hql, userId);
         return categories;
     }

@@ -26,18 +26,20 @@ public class CategoryController extends BaseController {
      * @param category
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void saveOrUpdateCategory(@RequestBody Category category) {
+    public Category saveOrUpdateCategory(@RequestBody Category category) {
         categoryService.saveOrUpdate(category);
+        return category;
     }
 
     /**
-     * 删除栏目
+     * 更改状态
+     * 标记删除/设为禁用/启用
      *
      * @param id
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteCategory(@PathVariable String id) {
-        categoryService.delete(id);
+    @RequestMapping(value = "/{id}/{state}", method = RequestMethod.DELETE)
+    public void deleteCategory(@PathVariable("id") String id,@PathVariable("state")Integer state) {
+        categoryService.delete(id,state);
     }
 
     /**

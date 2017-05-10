@@ -3,6 +3,7 @@ package com.wenka.web.controller;
 import com.wenka.commons.util.Pagination;
 import com.wenka.domain.model.Post;
 import com.wenka.domain.service.PostService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,5 +74,18 @@ public class PostController extends BaseController {
         pagination.setCount(postService.getListSize(postType,param, categoryIds, states));
         pagination.setRecords(postService.getList(postType,param, categoryIds, states, startIdx, length));
         return pagination;
+    }
+
+    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    public List<Post> getList(@RequestParam(required = false) String userId,
+                              @RequestParam(required = false) String param,
+                              @RequestParam(required = false) Post.PostType postType ,
+                              @RequestParam(required = false) List<String> categoryIds,
+                              @RequestParam(required = false) List<Integer> states){
+        if (StringUtils.isBlank(userId)){
+            userId = this.currentUserId;
+        }
+        List<Post> list = postService.getList(postType, param, categoryIds, states, userId);
+        return list;
     }
 }
