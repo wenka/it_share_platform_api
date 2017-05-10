@@ -71,21 +71,53 @@ public class PostController extends BaseController {
                            @RequestParam(required = false) Integer length) {
         Pagination<Post> pagination = new Pagination<Post>(page, length);
         Integer startIdx = pagination.getStartIdx();
-        pagination.setCount(postService.getListSize(postType,param, categoryIds, states));
-        pagination.setRecords(postService.getList(postType,param, categoryIds, states, startIdx, length));
+        pagination.setCount(postService.getListSize(postType, param, categoryIds, states));
+        pagination.setRecords(postService.getList(postType, param, categoryIds, states, startIdx, length));
         return pagination;
     }
 
-    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    /**
+     * 获取集合
+     *
+     * @param userId
+     * @param param
+     * @param postType
+     * @param categoryIds
+     * @param states
+     * @return
+     */
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public List<Post> getList(@RequestParam(required = false) String userId,
                               @RequestParam(required = false) String param,
-                              @RequestParam(required = false) Post.PostType postType ,
+                              @RequestParam(required = false) Post.PostType postType,
                               @RequestParam(required = false) List<String> categoryIds,
-                              @RequestParam(required = false) List<Integer> states){
-        if (StringUtils.isBlank(userId)){
+                              @RequestParam(required = false) List<Integer> states) {
+        if (StringUtils.isBlank(userId)) {
             userId = this.currentUserId;
         }
         List<Post> list = postService.getList(postType, param, categoryIds, states, userId);
         return list;
+    }
+
+    /***
+     * 获取集合数量
+     * @param userId
+     * @param param
+     * @param postType
+     * @param categoryIds
+     * @param states
+     * @return
+     */
+    @RequestMapping(value = "/getListSize", method = RequestMethod.GET)
+    public long getListSize(@RequestParam(required = false) String userId,
+                            @RequestParam(required = false) String param,
+                            @RequestParam(required = false) Post.PostType postType,
+                            @RequestParam(required = false) List<String> categoryIds,
+                            @RequestParam(required = false) List<Integer> states) {
+        if (StringUtils.isBlank(userId)) {
+            userId = this.currentUserId;
+        }
+        long listSize = postService.getListSize(postType, param, categoryIds, states, userId);
+        return listSize;
     }
 }

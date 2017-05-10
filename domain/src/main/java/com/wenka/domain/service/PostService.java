@@ -155,7 +155,23 @@ public class PostService {
      */
     public List<Post> getList(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
         HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
-        List<Post> byNamedParam = postDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs());
+        String hql = hqlArgs.getHql() + "p.createTime DESC";
+        List<Post> byNamedParam = postDao.findByNamedParam(hql, hqlArgs.getArgs());
         return byNamedParam;
+    }
+
+    /***
+     * 条件查询 获取集合数量
+     * @param postType
+     * @param param
+     * @param categoryIds
+     * @param states
+     * @param userId
+     * @return
+     */
+    public long getListSize(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
+        HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
+        long count = postDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
+        return count;
     }
 }
