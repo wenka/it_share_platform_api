@@ -95,7 +95,7 @@ public class PostService {
         }
 
         if (states != null && states.size() > 0) {
-            if (states.size() == 0) {
+            if (states.size() == 1) {
                 hql += " and p.state = :state";
                 args.put("state", states.get(0));
             } else {
