@@ -7,6 +7,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,14 @@ public class Post extends AbstractVersionEntity {
 
     public void setParent(Post parent) {
         this.parent = parent;
+    }
+
+    public BigInteger getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(BigInteger viewCount) {
+        this.viewCount = viewCount;
     }
 
     public enum PostType {
@@ -82,6 +91,9 @@ public class Post extends AbstractVersionEntity {
     @OneToMany(mappedBy = "owner")
     @Cascade(value = {org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<PostAttachment> postAttachments; //附件
+
+    @Column(name = "view_count")
+    private BigInteger viewCount = BigInteger.ZERO; //访问量
 
     public PostType getPostType() {
         return postType;

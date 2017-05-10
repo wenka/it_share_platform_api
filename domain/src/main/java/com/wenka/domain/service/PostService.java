@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class PostService {
             Category _category = categoryService.get(category.getId());
             post.setCategory(_category);
         } else {
-            post.setCategory(null);
+            throw new RuntimeException("请选择文章类别");
         }
 
         if (post.getAttachmentIds() != null) {
@@ -50,14 +51,20 @@ public class PostService {
     }
 
     /**
-     * 读取单一文章
+     * 读取单一文章，并增加访问量
      *
      * @param id
      * @return
      */
     public Post get(String id) {
 
-        return postDao.get(id);
+        Post post = postDao.get(id);
+
+        //每访问一次文章，访问量+1
+        BigInteger viewCount = post.getViewCount();
+        post.setViewCount(viewCount.add(BigInteger.ONE));
+        postDao.update(post);
+        return post;
 
     }
 
@@ -155,7 +162,7 @@ public class PostService {
      */
     public List<Post> getList(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
         HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
-        String hql = hqlArgs.getHql() + "p.createTime DESC";
+        String hql = hqlArgs.getHql() + " ORDER BY p.createTime DESC";
         List<Post> byNamedParam = postDao.findByNamedParam(hql, hqlArgs.getArgs());
         return byNamedParam;
     }
