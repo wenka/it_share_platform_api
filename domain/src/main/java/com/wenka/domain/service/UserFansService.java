@@ -20,8 +20,8 @@ import java.util.Map;
 @Service
 public class UserFansService {
 
-    private static final String RELATION_DIRECTION_ME = "me"; //我关注的
-    private static final String RELATION_DIRECTION_FOCUS_ME = "focusMe"; //关注我的
+    private static final String RELATION_MY_FOCUS = "myFocus"; //我关注的
+    private static final String RELATION_MY_FANS = "myFans"; //我的粉丝
 
     @Autowired
     private UserFansDao userFansDao;
@@ -56,9 +56,9 @@ public class UserFansService {
         String hql = "FROM UserFans uf WHERE 1=1";
 
         if (StringUtils.isNotBlank(direction)) {
-            if (direction.contains(RELATION_DIRECTION_ME)) { //我关注的
+            if (direction.contains(RELATION_MY_FOCUS)) { //我关注的
                 hql += " uf.owner.id = :userId";
-            } else if (direction.contains(RELATION_DIRECTION_FOCUS_ME)) { //关注我的
+            } else if (direction.contains(RELATION_MY_FANS)) { //关注我的
                 hql += " uf.fans.id = :userId";
             }
             args.put("userId", userId);

@@ -50,6 +50,26 @@ public class UserService {
     }
 
     /**
+     * 注册
+     * @param user
+     */
+    public void saveSegister(User user) {
+        user.setName(user.getAccount());
+        String firstSpell = PinYinUtil.getFirstSpell(user.getName());
+        user.setSpell(firstSpell);
+        String securePwd;
+        try {
+            securePwd = SecureCoder.sha1(user.getPassword());
+            user.setPassword(securePwd);
+        } catch (NoSuchAlgorithmException e) {
+            this.logger.info(e.getMessage());
+            throw new RuntimeException("密码无法解析");
+        }
+        user.setState(Integer.valueOf(1));
+        userDao.save(user);
+    }
+
+    /**
      * 删除用户
      *
      * @param id

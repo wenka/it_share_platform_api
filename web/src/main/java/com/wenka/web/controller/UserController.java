@@ -141,4 +141,11 @@ public class UserController {
         }
         this.userService.updatePswd(id,pswd);
     }
+
+    @AuthNotRequired
+    @RequestMapping(value = "/existed/{username}",method = RequestMethod.GET)
+    public Boolean existed(@PathVariable String username){
+        Boolean exist = userService.exist(username);
+        return exist;
+    }
 }
