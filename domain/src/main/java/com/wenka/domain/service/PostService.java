@@ -113,7 +113,7 @@ public class PostService {
             hql += " and p.state <> -1";
         }
 
-        if (StringUtils.isNoneBlank(postType.toString())) {
+        if (postType != null && StringUtils.isNotBlank(postType.toString())) {
             hql += " and p.postType=:postType";
             args.put("postType", postType);
         }
