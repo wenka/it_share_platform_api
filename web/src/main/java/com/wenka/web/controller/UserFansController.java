@@ -27,6 +27,7 @@ public class UserFansController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public void save(@RequestBody UserFans userFans) {
         userFansService.save(userFans);
+        this.saveLog(userFans.getOwnerName() + "关注了" + userFans.getFansName());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

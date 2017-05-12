@@ -29,6 +29,9 @@ public class UserFansService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private LogService logService;
+
     /**
      * 保存用户粉丝关系
      */
@@ -45,6 +48,8 @@ public class UserFansService {
      * @param id
      */
     public void delete(String id) {
+        UserFans userFans = userFansDao.get(id);
+        this.logService.save("取消关注了" + userFans.getFansName(),userFans.getOwner());
         this.userFansDao.delete(id);
     }
 

@@ -27,6 +27,9 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private LogService logService;
+
     /**
      * 获取用户
      *
@@ -47,6 +50,7 @@ public class UserService {
         String firstSpell = PinYinUtil.getFirstSpell(user.getName());
         user.setSpell(firstSpell);
         userDao.saveOrUpdate(user);
+        logService.save("资料修改生成",user);
     }
 
     /**
@@ -67,6 +71,7 @@ public class UserService {
         }
         user.setState(Integer.valueOf(1));
         userDao.save(user);
+        logService.save("注册",user);
     }
 
     /**
@@ -79,6 +84,7 @@ public class UserService {
         if (user != null && user.getState().intValue() != -1) {
             user.setState(Integer.valueOf(-1));
             userDao.update(user);
+            logService.save("注册",user);
         } else {
             throw new RuntimeException("该账户已删除");
         }

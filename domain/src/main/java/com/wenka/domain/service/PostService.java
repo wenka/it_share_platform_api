@@ -27,6 +27,9 @@ public class PostService {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private LogService logService;
+
     /**
      * 新增修改文章
      *
@@ -89,6 +92,7 @@ public class PostService {
         Post post = postDao.get(id);
         post.setState(-1);// 更改对象状态为禁用
         postDao.update(post);
+        logService.save(post.getPostType().toString() + "：[" + post.getTitle() + "]删除成功",post.getCreator());
     }
 
     private HqlArgs genHqlArgs(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {

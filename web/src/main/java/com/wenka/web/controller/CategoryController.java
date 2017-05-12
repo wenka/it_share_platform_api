@@ -28,6 +28,7 @@ public class CategoryController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Category saveOrUpdateCategory(@RequestBody Category category) {
         categoryService.saveOrUpdate(category);
+        this.saveLog("类别：[" + category.getName() + "]保存成功");
         return category;
     }
 

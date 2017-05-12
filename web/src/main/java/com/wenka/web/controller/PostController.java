@@ -29,6 +29,7 @@ public class PostController extends BaseController {
         post.setCreator(this.currentUser);
         post.setAuthor(this.currentUser.getName());
         postService.saveOrUpdate(post);
+        this.saveLog(post.getPostType().toString() + "：[" + post.getTitle() + "]保存成功");
     }
 
     /**

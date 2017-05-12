@@ -25,6 +25,9 @@ public class CategoryService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private LogService logService;
+
     /**
      * 新增或者修改
      *
@@ -54,6 +57,19 @@ public class CategoryService {
         if (category != null) {
             category.setState(state);
             this.categoryDao.update(category);
+            String info = "";
+            switch (state.intValue()){
+                case -1:
+                    info = "删除";
+                    break;
+                case 0:
+                    info = "禁用";
+                    break;
+                case 1:
+                    info = "启用";
+                    break;
+            }
+            logService.save("类别：[" + category.getName() + "]" + info + "成功",category.getCreator());
         }
     }
 
