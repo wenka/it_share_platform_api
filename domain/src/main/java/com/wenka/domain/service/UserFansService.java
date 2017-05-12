@@ -57,9 +57,9 @@ public class UserFansService {
 
         if (StringUtils.isNotBlank(direction)) {
             if (direction.contains(RELATION_MY_FOCUS)) { //我关注的
-                hql += " uf.owner.id = :userId";
+                hql += " AND uf.owner.id = :userId";
             } else if (direction.contains(RELATION_MY_FANS)) { //关注我的
-                hql += " uf.fans.id = :userId";
+                hql += " AND uf.fans.id = :userId";
             }
             args.put("userId", userId);
         }
