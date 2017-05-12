@@ -49,6 +49,8 @@ public class PostController extends BaseController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Post get(@PathVariable String id) {
+        //增加阅读量
+        postService.updateViwCount(id,this.currentUserId);
         return postService.get(id);
     }
 

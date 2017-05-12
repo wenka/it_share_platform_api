@@ -59,13 +59,25 @@ public class PostService {
     public Post get(String id) {
 
         Post post = postDao.get(id);
-
-        //每访问一次文章，访问量+1
-        BigInteger viewCount = post.getViewCount();
-        post.setViewCount(viewCount.add(BigInteger.ONE));
-        postDao.update(post);
         return post;
 
+    }
+
+    /***
+     * 增加阅读量
+     * @param currentUserId
+     * @param id
+     */
+    public void updateViwCount(String id,String currentUserId){
+        Post post = postDao.get(id);
+        if (post != null){
+            String creatorId = post.getCreatorId();
+            if (!creatorId.equals(currentUserId)){
+                BigInteger viewCount = post.getViewCount();
+                post.setViewCount(viewCount.add(BigInteger.ONE));
+                postDao.update(post);
+            }
+        }
     }
 
     /**
