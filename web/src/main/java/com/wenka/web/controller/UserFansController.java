@@ -1,5 +1,6 @@
 package com.wenka.web.controller;
 
+import com.wenka.domain.model.User;
 import com.wenka.domain.model.UserFans;
 import com.wenka.domain.service.UserFansService;
 import org.apache.commons.lang3.StringUtils;
@@ -22,12 +23,15 @@ public class UserFansController extends BaseController {
     /**
      * 保存
      *
-     * @param userFans
+     * @param user
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void save(@RequestBody UserFans userFans) {
+    public void save(@RequestBody User user) {
+        UserFans userFans = new UserFans();
+        userFans.setOwner(this.currentUser);
+        userFans.setFocus(user);
         userFansService.save(userFans);
-        this.saveLog(userFans.getOwnerName() + "关注了" + userFans.getFansName());
+        this.saveLog("我关注了" + userFans.getFocusName());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -45,10 +49,7 @@ public class UserFansController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<UserFans> getList(@RequestParam(required = true) String direction,
                                   @RequestParam(required = false) String userId) {
-        if (StringUtils.isBlank(userId)) {
-            userId = this.currentUserId;
-        }
-        return userFansService.getList(direction, userId);
+        return userFansService.getList(direction,this.currentUserId, userId);
     }
 
     /**
@@ -61,10 +62,7 @@ public class UserFansController extends BaseController {
     @RequestMapping(value = "/listSize", method = RequestMethod.GET)
     public long getListSize(@RequestParam(required = true) String direction,
                             @RequestParam(required = false) String userId) {
-        if (StringUtils.isBlank(userId)) {
-            userId = this.currentUserId;
-        }
-        return userFansService.getListSize(direction, userId);
+        return userFansService.getListSize(direction,this.currentUserId, userId);
     }
 
 }

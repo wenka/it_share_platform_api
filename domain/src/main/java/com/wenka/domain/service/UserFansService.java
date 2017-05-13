@@ -22,6 +22,7 @@ public class UserFansService {
 
     private static final String RELATION_MY_FOCUS = "myFocus"; //我关注的
     private static final String RELATION_MY_FANS = "myFans"; //我的粉丝
+    private static final String RELATION_IS_EXISTED = "isExisted"; //关系是否存在
 
     @Autowired
     private UserFansDao userFansDao;
@@ -36,9 +37,9 @@ public class UserFansService {
      * 保存用户粉丝关系
      */
     public void save(UserFans userFans) {
-        User fans = userDao.get(userFans.getFansId());
+        User fans = userDao.get(userFans.getFocusId());
         User owner = userDao.get(userFans.getOwnerId());
-        userFans.setFans(fans);
+        userFans.setFocus(fans);
         userFans.setOwner(owner);
         userFansDao.save(userFans);
     }
@@ -49,12 +50,12 @@ public class UserFansService {
      */
     public void delete(String id) {
         UserFans userFans = userFansDao.get(id);
-        this.logService.save("取消关注了" + userFans.getFansName(),userFans.getOwner()
+        this.logService.save("取消关注了" + userFans.getFocusName(),userFans.getOwner()
         );
         this.userFansDao.delete(id);
     }
 
-    private HqlArgs getHqlArgs(String direction, String userId) {
+    private HqlArgs getHqlArgs(String direction,String currentUserId, String userId) {
         direction = StringUtils.trimToEmpty(direction);
 
         Map<String, Object> args = new HashMap<String, Object>();
@@ -63,11 +64,16 @@ public class UserFansService {
 
         if (StringUtils.isNotBlank(direction)) {
             if (direction.contains(RELATION_MY_FOCUS)) { //我关注的
-                hql += " AND uf.owner.id = :userId";
+                hql += " AND uf.owner.id = :currentUserId";
+                args.put("currentUserId",currentUserId);
             } else if (direction.contains(RELATION_MY_FANS)) { //关注我的
-                hql += " AND uf.fans.id = :userId";
+                hql += " AND uf.focus.id = :userId";
+                args.put("userId", userId);
+            } else if (direction.contains(RELATION_IS_EXISTED)) { //查询关系是否存在
+                hql += " AND uf.owner.id = :currentUserId AND uf.focus.id = :userId";
+                args.put("currentUserId",currentUserId);
+                args.put("userId", userId);
             }
-            args.put("userId", userId);
         }
 
         return new HqlArgs(hql,args);
@@ -79,8 +85,8 @@ public class UserFansService {
      * @param userId
      * @return
      */
-    public List<UserFans> getList(String direction,String userId) {
-        HqlArgs hqlArgs = this.getHqlArgs(direction, userId);
+    public List<UserFans> getList(String direction,String currentUserId,String userId) {
+        HqlArgs hqlArgs = this.getHqlArgs(direction,currentUserId, userId);
         String hql = hqlArgs.getHql() + " ORDER BY uf.createTime DESC";
         return userFansDao.findByNamedParam(hql,hqlArgs.getArgs());
     }
@@ -91,8 +97,8 @@ public class UserFansService {
      * @param userId
      * @return
      */
-    public long getListSize(String direction,String userId){
-        HqlArgs hqlArgs = this.getHqlArgs(direction, userId);
+    public long getListSize(String direction,String currentUserId,String userId){
+        HqlArgs hqlArgs = this.getHqlArgs(direction,currentUserId, userId);
         return userFansDao.getCount(hqlArgs.getHql(),hqlArgs.getArgs());
     }
 }

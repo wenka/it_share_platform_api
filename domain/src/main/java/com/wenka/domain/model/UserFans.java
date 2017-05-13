@@ -18,8 +18,8 @@ public class UserFans extends AbstractEntity{
     private User owner; //所属者
 
     @ManyToOne
-    @JoinColumn(name = "fans_id")
-    private User fans; //粉丝
+    @JoinColumn(name = "focus_id")
+    private User focus; //粉丝
 
     @Column(name = "create_time",nullable = false)
     @JSONField(format = "yyyy-MM-dd hh:mm:ss")
@@ -32,10 +32,10 @@ public class UserFans extends AbstractEntity{
     private String ownerName;
 
     @Transient
-    private String fansId;
+    private String focusId;
 
     @Transient
-    private String fansName;
+    private String focusName;
 
     public User getOwner() {
         return owner;
@@ -45,12 +45,12 @@ public class UserFans extends AbstractEntity{
         this.owner = owner;
     }
 
-    public User getFans() {
-        return fans;
+    public User getFocus() {
+        return focus;
     }
 
-    public void setFans(User fans) {
-        this.fans = fans;
+    public void setFocus(User focus) {
+        this.focus = focus;
     }
 
     public Date getCreateTime() {
@@ -77,19 +77,19 @@ public class UserFans extends AbstractEntity{
         this.ownerName = ownerName;
     }
 
-    public String getFansId() {
-        return this.fans != null ?this.fans.getId():"";
+    public String getFocusId() {
+        return this.focus != null ?this.focus.getId():"";
     }
 
-    public void setFansId(String fansId) {
-        this.fansId = fansId;
+    public void setFocusId(String focusId) {
+        this.focusId = focusId;
     }
 
-    public String getFansName() {
-        return this.fans != null ?this.fans.getName():"";
+    public String getFocusName() {
+        return this.focus != null ?this.focus.getName():"";
     }
 
-    public void setFansName(String fansName) {
-        this.fansName = fansName;
+    public void setFocusName(String focusName) {
+        this.focusName = focusName;
     }
 }
