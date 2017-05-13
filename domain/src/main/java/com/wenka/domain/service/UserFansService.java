@@ -49,7 +49,8 @@ public class UserFansService {
      */
     public void delete(String id) {
         UserFans userFans = userFansDao.get(id);
-        this.logService.save("取消关注了" + userFans.getFansName(),userFans.getOwner());
+        this.logService.save("取消关注了" + userFans.getFansName(),userFans.getOwner()
+        );
         this.userFansDao.delete(id);
     }
 
