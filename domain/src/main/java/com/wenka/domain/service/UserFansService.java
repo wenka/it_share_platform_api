@@ -101,4 +101,14 @@ public class UserFansService {
         HqlArgs hqlArgs = this.getHqlArgs(direction,currentUserId, userId);
         return userFansDao.getCount(hqlArgs.getHql(),hqlArgs.getArgs());
     }
+
+    public boolean getUserFansIsExisted(String currentUserId,String userId){
+        HqlArgs hqlArgs = this.getHqlArgs(RELATION_IS_EXISTED, currentUserId, userId);
+        long count = userFansDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
+        if (count == 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

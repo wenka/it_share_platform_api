@@ -49,7 +49,7 @@ public class UserFansController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<UserFans> getList(@RequestParam(required = true) String direction,
                                   @RequestParam(required = false) String userId) {
-        return userFansService.getList(direction,this.currentUserId, userId);
+        return userFansService.getList(direction, this.currentUserId, userId);
     }
 
     /**
@@ -62,7 +62,18 @@ public class UserFansController extends BaseController {
     @RequestMapping(value = "/listSize", method = RequestMethod.GET)
     public long getListSize(@RequestParam(required = true) String direction,
                             @RequestParam(required = false) String userId) {
-        return userFansService.getListSize(direction,this.currentUserId, userId);
+        return userFansService.getListSize(direction, this.currentUserId, userId);
+    }
+
+    /***
+     * 查询用户关系是否存在
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/isExisted", method = RequestMethod.GET)
+    public boolean getUserFansIsExisted(@RequestParam(required = true) String userId) {
+        boolean userFansIsExisted = this.userFansService.getUserFansIsExisted(this.currentUserId, userId);
+        return userFansIsExisted;
     }
 
 }
