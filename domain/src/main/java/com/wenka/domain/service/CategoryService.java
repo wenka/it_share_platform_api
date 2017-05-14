@@ -58,7 +58,7 @@ public class CategoryService {
             category.setState(state);
             this.categoryDao.update(category);
             String info = "";
-            switch (state.intValue()){
+            switch (state.intValue()) {
                 case -1:
                     info = "删除";
                     break;
@@ -69,7 +69,7 @@ public class CategoryService {
                     info = "启用";
                     break;
             }
-            logService.save("类别：[" + category.getName() + "]" + info + "成功",category.getCreator());
+            logService.save("类别：[" + category.getName() + "]" + info + "成功", category.getCreator());
         }
     }
 
@@ -147,5 +147,16 @@ public class CategoryService {
         String hql = "FROM Category WHERE creator.id = ? AND state <> -1 ORDER BY createTime DESC";
         List<Category> categories = categoryDao.find(hql, userId);
         return categories;
+    }
+
+    /**
+     * 获取栏目集合
+     * tips:若栏目名相同则合并
+     *
+     * @return
+     */
+    public List<Map<String, Object>> getPubCategoryList() {
+        List<Map<String, Object>> pubCategoryList = categoryDao.getPubCategoryList();
+        return pubCategoryList;
     }
 }

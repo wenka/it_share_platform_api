@@ -71,11 +71,11 @@ public class PostService {
      * @param currentUserId
      * @param id
      */
-    public void updateViwCount(String id,String currentUserId){
+    public void updateViwCount(String id, String currentUserId) {
         Post post = postDao.get(id);
-        if (post != null){
+        if (post != null) {
             String creatorId = post.getCreatorId();
-            if (!creatorId.equals(currentUserId)){
+            if (!creatorId.equals(currentUserId)) {
                 BigInteger viewCount = post.getViewCount();
                 post.setViewCount(viewCount.add(BigInteger.ONE));
                 postDao.update(post);
@@ -92,7 +92,7 @@ public class PostService {
         Post post = postDao.get(id);
         post.setState(-1);// 更改对象状态为禁用
         postDao.update(post);
-        logService.save(post.getPostType().toString() + "：[" + post.getTitle() + "]删除成功",post.getCreator());
+        logService.save(post.getPostType().toString() + "：[" + post.getTitle() + "]删除成功", post.getCreator());
     }
 
     private HqlArgs genHqlArgs(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
@@ -103,7 +103,7 @@ public class PostService {
         String hql = "from Post p where 1=1";
 
         if (StringUtils.isNotBlank(param)) {
-            hql += " and (p.name like :arg or p.remark like :arg or p.author like :arg or p.title like :arg or p.subTitle like :arg)";
+            hql += " and (p.title like :arg or p.subTitle like :arg or p.category.name like :arg)";
             args.put("arg", "%" + param + "%");
         }
 
@@ -183,6 +183,23 @@ public class PostService {
         return byNamedParam;
     }
 
+    /**
+     * 按照阅读量排序
+     *
+     * @param postType
+     * @param param
+     * @param categoryIds
+     * @param states
+     * @param userId
+     * @return
+     */
+    public List<Post> getListByViewCount(Post.PostType postType, String param, List<String> categoryIds, List<Integer> states, String userId) {
+        HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
+        String hql = hqlArgs.getHql() + " ORDER BY p.viewCount DESC, p.createTime DESC";
+        List<Post> byNamedParam = postDao.findByNamedParam(hql, hqlArgs.getArgs());
+        return byNamedParam;
+    }
+
     /***
      * 条件查询 获取集合数量
      * @param postType
@@ -196,5 +213,15 @@ public class PostService {
         HqlArgs hqlArgs = this.genHqlArgs(postType, param, categoryIds, states, userId);
         long count = postDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
         return count;
+    }
+
+    /**
+     * 查询热门作者
+     *
+     * @return
+     */
+    public List<Map<String, Object>> getPopularAuthor() {
+        List<Map<String, Object>> popularAuthor = this.postDao.getPopularAuthor();
+        return popularAuthor;
     }
 }

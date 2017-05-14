@@ -7,13 +7,18 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import com.wenka.commons.util.RandomCode;
 import com.wenka.commons.web.AuthNotRequired;
+import com.wenka.domain.model.Post;
 import com.wenka.domain.model.User;
+import com.wenka.domain.service.CategoryService;
+import com.wenka.domain.service.PostService;
 import com.wenka.domain.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,31 +30,37 @@ import java.util.Map;
 @RequestMapping("/pub")
 public class PublicController {
 
-//    @Value("${taobao.appKey}")
+    //    @Value("${taobao.appKey}")
     private String appKey = "23554880";
 
-//    @Value("${taobao.appSecret}")
+    //    @Value("${taobao.appSecret}")
     private String appSecret = "c3ad75ff1e00b7d36830da0884ee16d7";
 
-//    @Value("${taobao.reqUrl}")
+    //    @Value("${taobao.reqUrl}")
     private String reqUrl = "http://gw.api.taobao.com/router/rest";
 
-//    @Value("${smsFreeSignName}")
+    //    @Value("${smsFreeSignName}")
     private String smsFreeSignName = "文卡";
 
-//    @Value("${smsTemplateCode}")
+    //    @Value("${smsTemplateCode}")
     private String smsTemplateCode = "SMS_32750063";
 
-//    @Value("${smsType}")
+    //    @Value("${smsType}")
     private String smsType = "normal";
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/sendCode/{tel}",method = RequestMethod.GET)
-    public Map sendCodeMsg(@PathVariable String tel){
+    @Autowired
+    private PostService postService;
 
-        Map<String,Object> args = new HashMap<String,Object>();
+    @Autowired
+    private CategoryService categoryService;
+
+    @RequestMapping(value = "/sendCode/{tel}", method = RequestMethod.GET)
+    public Map sendCodeMsg(@PathVariable String tel) {
+
+        Map<String, Object> args = new HashMap<String, Object>();
 
         String code = RandomCode.getRandomCode();
 
@@ -65,23 +76,65 @@ public class PublicController {
         AlibabaAliqinFcSmsNumSendResponse response;
         try {
             response = client.execute(req);
-        }catch (ApiException e){
+        } catch (ApiException e) {
             throw new RuntimeException(e);
         }
 
-        args.put("code",code);
-        args.put("response",response);
+        args.put("code", code);
+        args.put("response", response);
         return args;
     }
 
     /**
      * 注册
+     *
      * @param user
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public User save(@RequestBody User user){
+    public User save(@RequestBody User user) {
         this.userService.saveSegister(user);
         return user;
+    }
+
+    /**
+     * 查询post集合 按照阅读量查询
+     *
+     * @param param
+     * @param postType
+     * @param categoryIds
+     * @param states
+     * @return
+     */
+    @RequestMapping(value = "/getPostList", method = RequestMethod.GET)
+    public List<Post> getList(@RequestParam(required = false) String param,
+                              @RequestParam(required = false) Post.PostType postType,
+                              @RequestParam(required = false) List<String> categoryIds,
+                              @RequestParam(required = false) List<Integer> states) {
+
+        List<Post> list = postService.getListByViewCount(postType, param, categoryIds, states, null);
+        return list;
+    }
+
+    /**
+     * 获取热门作者
+     *
+     * @return
+     */
+    @RequestMapping(value = "/popularAuthor", method = RequestMethod.GET)
+    public List<Map<String, Object>> getPopularAuthor() {
+        List<Map<String, Object>> popularAuthor = this.postService.getPopularAuthor();
+        return popularAuthor;
+    }
+
+    /**
+     * 获取类别集合
+     *
+     * @return
+     */
+    @RequestMapping(value = "/categoryList", method = RequestMethod.GET)
+    public List<Map<String, Object>> getPubCategortList() {
+        List<Map<String, Object>> pubCategoryList = categoryService.getPubCategoryList();
+        return pubCategoryList;
     }
 }
