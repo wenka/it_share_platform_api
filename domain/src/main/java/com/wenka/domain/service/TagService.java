@@ -17,6 +17,8 @@ public class TagService {
     @Autowired
     private TagDao tagDao;
 
+    private LogService logService;
+
     /**
      * 保存
      *
@@ -26,6 +28,7 @@ public class TagService {
         Tag existed = this.getExisted(tag);
         if (existed == null) {
             this.tagDao.save(tag);
+            logService.save("标签：[" + tag.getName() + "]保存成功",tag.getUser());
             return tag;
         }else {
             return existed;
