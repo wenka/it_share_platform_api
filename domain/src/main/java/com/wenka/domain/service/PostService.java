@@ -4,8 +4,6 @@ import com.wenka.domain.dao.PostDao;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.model.HqlArgs;
 import com.wenka.domain.model.Post;
-import com.wenka.domain.model.PostTag;
-import javafx.geometry.Pos;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,6 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author 文卡<wkwenka@gmail.com>  on 17-4-5.
