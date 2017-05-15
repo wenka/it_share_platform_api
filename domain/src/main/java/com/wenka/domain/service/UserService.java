@@ -50,14 +50,21 @@ public class UserService {
         String firstSpell = PinYinUtil.getFirstSpell(user.getName());
         user.setSpell(firstSpell);
         userDao.saveOrUpdate(user);
-        logService.save("资料修改生成",user);
+        logService.save("资料修改生成", user);
     }
 
     /**
      * 注册
+     *
      * @param user
      */
     public void saveSegister(User user) {
+
+        Boolean aBoolean = this.existTel(user.getTel());
+        if (aBoolean) {
+            throw new RuntimeException("此手机号已经注册");
+        }
+
         user.setName(user.getAccount());
         String firstSpell = PinYinUtil.getFirstSpell(user.getName());
         user.setSpell(firstSpell);
@@ -71,7 +78,7 @@ public class UserService {
         }
         user.setState(Integer.valueOf(1));
         userDao.save(user);
-        logService.save("注册",user);
+        logService.save("注册", user);
     }
 
     /**
@@ -84,7 +91,7 @@ public class UserService {
         if (user != null && user.getState().intValue() != -1) {
             user.setState(Integer.valueOf(-1));
             userDao.update(user);
-            logService.save("注册",user);
+            logService.save("注册", user);
         } else {
             throw new RuntimeException("该账户已删除");
         }
@@ -148,6 +155,53 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 查询电话号是否已被注册
+     *
+     * @param tel
+     * @return
+     */
+    public Boolean existTel(String tel) {
+        tel = StringUtils.trimToEmpty(tel);
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+        detachedCriteria.add(Restrictions.eq("tel", tel));
+        detachedCriteria.add(Restrictions.ne("state", Integer.valueOf(-1)));
+        List<User> byCriteria = this.userDao.findByCriteria(detachedCriteria);
+        if (byCriteria != null && byCriteria.size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 通过账户和电话查询用户
+     *
+     * @param account
+     * @param tel
+     * @return
+     */
+    public User getByaccountAndTel(String account, String tel) {
+        account = StringUtils.trimToEmpty(account);
+        tel = StringUtils.trimToEmpty(tel);
+
+        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        criteria.add(Restrictions.eq("account", account));
+        criteria.add(Restrictions.eq("tel", tel));
+        criteria.add(Restrictions.ne("state", Integer.valueOf(-1)));
+        List list = this.userDao.findByCriteria(criteria);
+
+        if (list != null && list.size() > 0) {
+            if (list.size() == 1) {
+                User user = (User) list.get(0);
+                return user;
+            } else {
+                throw new RuntimeException("账户异常");
+            }
+        }
+
+        return null;
     }
 
     /**

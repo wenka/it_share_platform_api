@@ -137,4 +137,31 @@ public class PublicController {
         List<Map<String, Object>> pubCategoryList = categoryService.getPubCategoryList();
         return pubCategoryList;
     }
+
+    /**
+     * 忘记密码
+     *
+     * @param account
+     * @param tel
+     * @param password
+     */
+    @RequestMapping(value = "/updatePswd", method = RequestMethod.GET)
+    public void updatePswd(@RequestParam(required = true) String account,
+                           @RequestParam(required = true) String tel,
+                           @RequestParam(required = true) String password) {
+        String pswd = StringUtils.trimToNull(password);
+        account = StringUtils.trimToNull(account);
+        tel = StringUtils.trimToNull(tel);
+
+        User byaccountAndTel = userService.getByaccountAndTel(account, tel);
+
+        if (byaccountAndTel == null){
+            throw new RuntimeException("该账户与此手机号不匹配");
+        }
+
+        if (StringUtils.isBlank(pswd)) {
+            throw new RuntimeException("密码不能为空");
+        }
+        this.userService.updatePswd(byaccountAndTel.getId(), pswd);
+    }
 }
