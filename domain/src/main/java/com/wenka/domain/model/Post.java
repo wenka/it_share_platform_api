@@ -66,6 +66,7 @@ public class Post extends AbstractVersionEntity {
     private String content;
 
     @OneToMany(mappedBy = "parent")
+    @OrderBy("create_time desc ")
     private Set<Post> comments; //评论
 
     @JSONField(serialize = false)

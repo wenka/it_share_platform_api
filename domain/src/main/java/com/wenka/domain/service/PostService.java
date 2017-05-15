@@ -37,12 +37,20 @@ public class PostService {
      */
     public void saveOrUpdate(Post post) {
 
-        Category category = post.getCategory();
-        if (category != null) {
-            Category _category = categoryService.get(category.getId());
-            post.setCategory(_category);
-        } else {
-            throw new RuntimeException("请选择文章类别");
+        if(post.getPostType() != Post.PostType.评论){
+            Category category = post.getCategory();
+            if (category != null) {
+                Category _category = categoryService.get(category.getId());
+                post.setCategory(_category);
+            } else {
+                throw new RuntimeException("请选择文章类别");
+            }
+        }else if (post.getPostType() == Post.PostType.评论){
+            Post parent = post.getParent();
+            if (parent != null){
+                Post _post = postDao.get(parent.getId());
+                post.setParent(_post);
+            }
         }
 
         if (post.getAttachmentIds() != null) {
