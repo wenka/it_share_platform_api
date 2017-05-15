@@ -32,25 +32,25 @@
         <property name="password" value="${jdbc.password}"></property>
     </bean>
     <!--<bean id="dateSource"-->
-          <!--class="com.alibaba.druid.pool.DruidDataSource">-->
-        <!--<property name="driverClassName" value="${jdbc.driver}"></property>-->
-        <!--<property name="url" value="${jdbc.url}"></property>-->
-        <!--<property name="username" value="${jdbc.username}"></property>-->
-        <!--<property name="password" value="${jdbc.password}"></property>-->
-        <!--<property name="validationQuery" value="select 1"/>-->
-        <!--<property name="initialSize" value="1"/>-->
-        <!--<property name="minIdle" value="1"/>-->
-        <!--<property name="maxActive" value="20"/>-->
-        <!--<property name="maxWait" value="60000"/>-->
-        <!--<property name="timeBetweenEvictionRunsMillis" value="60000"/>-->
-        <!--<property name="minEvictableIdleTimeMillis" value="300000"/>-->
-        <!--<property name="testWhileIdle" value="true"/>-->
-        <!--<property name="testOnBorrow" value="false"/>-->
-        <!--<property name="testOnReturn" value="false"/>-->
-        <!--&lt;!&ndash; mysql 不支持 &ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="poolPreparedStatements" value="true"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>&ndash;&gt;-->
-        <!--<property name="filters" value="stat"/>-->
+    <!--class="com.alibaba.druid.pool.DruidDataSource">-->
+    <!--<property name="driverClassName" value="${jdbc.driver}"></property>-->
+    <!--<property name="url" value="${jdbc.url}"></property>-->
+    <!--<property name="username" value="${jdbc.username}"></property>-->
+    <!--<property name="password" value="${jdbc.password}"></property>-->
+    <!--<property name="validationQuery" value="select 1"/>-->
+    <!--<property name="initialSize" value="1"/>-->
+    <!--<property name="minIdle" value="1"/>-->
+    <!--<property name="maxActive" value="20"/>-->
+    <!--<property name="maxWait" value="60000"/>-->
+    <!--<property name="timeBetweenEvictionRunsMillis" value="60000"/>-->
+    <!--<property name="minEvictableIdleTimeMillis" value="300000"/>-->
+    <!--<property name="testWhileIdle" value="true"/>-->
+    <!--<property name="testOnBorrow" value="false"/>-->
+    <!--<property name="testOnReturn" value="false"/>-->
+    <!--&lt;!&ndash; mysql 不支持 &ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="poolPreparedStatements" value="true"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>&ndash;&gt;-->
+    <!--<property name="filters" value="stat"/>-->
     <!--</bean>-->
 
     <!-- 配置 SessionFactory -->
@@ -69,7 +69,7 @@
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <!--<prop key="hibernate.dialect">-->
-                    <!--org.hibernate.dialect.PostgreSQLDialect-->
+                <!--org.hibernate.dialect.PostgreSQLDialect-->
                 <!--</prop>-->
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.show_sql">true</prop>
@@ -79,8 +79,11 @@
                 <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
                 <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
                 <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
-                <!-- <prop key="hibernate.cache.use_second_level_cache">true</prop> <prop
-                    key="hibernate.cache.use_query_cache">true</prop> <prop key="hibernate.cache.region.factory_class">
+                <!--<prop key="hibernate.cache.use_second_level_cache">true</prop>-->
+                <!--<prop-->
+                        <!--key="hibernate.cache.use_query_cache">true-->
+                <!--</prop>-->
+                <!-- <prop key="hibernate.cache.region.factory_class">
                     org.hibernate.cache.ehcache.EhCacheRegionFactory </prop> <prop key="hibernate.cache.use_structured_entries">true</prop>
                     <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop> -->
             </props>

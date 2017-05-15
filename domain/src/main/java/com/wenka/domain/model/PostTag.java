@@ -75,4 +75,12 @@ public class PostTag extends AbstractEntity {
     public void setPostId(String postId) {
         this.postId = postId;
     }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
 }

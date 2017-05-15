@@ -15,7 +15,7 @@ import java.util.Date;
 public class User extends AbstractVersionEntity {
 
     @Column(name = "account", nullable = false)
-    @Length(min = 5, max = 36)
+    @Length(min = 4, max = 36)
     private String account; //账户
 
     @Column(name = "password", nullable = false)

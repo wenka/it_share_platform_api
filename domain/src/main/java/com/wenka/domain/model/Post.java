@@ -1,6 +1,7 @@
 package com.wenka.domain.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NotFound;
@@ -20,26 +21,46 @@ import java.util.Set;
 @Table(name = "post")
 public class Post extends AbstractVersionEntity {
 
-    public Post getParent() {
-        return parent;
+
+    public Set<PostTag> getPostTags() {
+        return postTags;
     }
 
-    public void setParent(Post parent) {
-        this.parent = parent;
+    public void setPostTags(Set<PostTag> postTags) {
+        this.postTags = postTags;
     }
 
-    public BigInteger getViewCount() {
-        return viewCount;
+    public String getTagNames() {
+        Set<String> tagNames = new HashSet<String>();
+        if (this.tags != null && this.tags.size() > 0){
+            for (Tag tag: tags){
+                tagNames.add(tag.getName());
+            }
+        }
+        return StringUtils.join(tagNames,",");
     }
 
-    public void setViewCount(BigInteger viewCount) {
-        this.viewCount = viewCount;
+    public void setTagNames(String tagNames) {
+        this.tagNames = tagNames;
+    }
+
+    public Set<Tag> getTags() {
+        Set<Tag> tagNames = new HashSet<Tag>();
+        if (postTags != null && postTags.size() > 0){
+            for (PostTag postTag: postTags){
+                tagNames.add(postTag.getTag());
+            }
+        }
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     public enum PostType {
-        博客,头条,提问, 评论
+        博客,头条,提问, 评论;
     }
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "post_type", nullable = false)
     private PostType postType;
@@ -68,6 +89,15 @@ public class Post extends AbstractVersionEntity {
     @OneToMany(mappedBy = "parent")
     @OrderBy("create_time desc ")
     private Set<Post> comments; //评论
+
+    @OneToMany(mappedBy = "post")
+    private Set<PostTag> postTags;
+
+    @Transient
+    private String tagNames;
+
+    @Transient
+    private Set<Tag> tags;
 
     @JSONField(serialize = false)
     @ManyToOne
@@ -112,10 +142,10 @@ public class Post extends AbstractVersionEntity {
         this.category = category;
     }
 
-
     public String getAuthor() {
         return author;
     }
+
 
     public void setAuthor(String author) {
         this.author = author;
@@ -219,24 +249,24 @@ public class Post extends AbstractVersionEntity {
 
     @Transient
     private String categoryId;
+
     @Transient
     private String categoryName;
-
     @Transient
     private String parentId;
+
     @Transient
     private String parentTitle;
-
     @Transient
     private String creatorId;
+
     @Transient
     private String creatorName;
-
     @Transient
     private String attachmentIds;
+
     @Transient
     private String attachmentNames;
-
     public String getCategoryId() {
         return this.category == null ? this.categoryId : this.category.getId();
     }
@@ -313,5 +343,21 @@ public class Post extends AbstractVersionEntity {
 
     public void setAttachmentNames(String attachmentNames) {
         this.attachmentNames = attachmentNames;
+    }
+
+    public Post getParent() {
+        return parent;
+    }
+
+    public void setParent(Post parent) {
+        this.parent = parent;
+    }
+
+    public BigInteger getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(BigInteger viewCount) {
+        this.viewCount = viewCount;
     }
 }

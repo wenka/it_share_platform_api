@@ -4,6 +4,7 @@ import com.wenka.domain.dao.PostDao;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.model.HqlArgs;
 import com.wenka.domain.model.Post;
+import com.wenka.domain.model.PostTag;
 import javafx.geometry.Pos;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class PostService {
 
     @Autowired
     private LogService logService;
+
+    @Autowired
+    private PostTagService postTagService;
 
     /**
      * 新增修改文章
@@ -56,8 +60,8 @@ public class PostService {
         if (post.getAttachmentIds() != null) {
             post = postDao.getAttachments(post);
         }
-
         postDao.saveOrUpdate(post);
+        postTagService.save(post);
 
     }
 
