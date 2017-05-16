@@ -81,4 +81,10 @@ public class LogService {
         String hql = hqlArgs.getHql() + " order by l.createTime desc";
         return this.logDao.findByNamedParam(hql, startIdx, length, hqlArgs.getArgs());
     }
+
+    public List<Log> getLogList(String param, Date sdate, Date edate,List<String> userIds){
+        HqlArgs hqlArgs = this.getHqlArgs(param, sdate, edate, userIds);
+        String hql = hqlArgs.getHql() + " order by l.createTime desc";
+        return this.logDao.findByNamedParam(hql, hqlArgs.getArgs());
+    }
 }

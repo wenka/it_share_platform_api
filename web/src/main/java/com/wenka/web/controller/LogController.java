@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -50,5 +51,18 @@ public class LogController extends BaseController {
         pagination.setCount(logService.getResultSize(param, sdate, edate, userIds));
         pagination.setRecords(logService.getResultList(param, sdate, edate, startIdx, rows, userIds));
         return pagination;
+    }
+
+    @RequestMapping(value = "/logList", method = RequestMethod.GET)
+    public List<Log> list(@RequestParam(required = false) String param,
+                           @RequestParam(required = false) Date sdate,
+                           @RequestParam(required = false) Date edate,
+                           @RequestParam(required = false) List<String> userIds) {
+
+        if (userIds == null || userIds.size() == 0){
+            userIds  = new LinkedList<String>();
+            userIds.add(this.currentUserId);
+        }
+        return this.logService.getLogList(param,sdate,edate,userIds);
     }
 }
