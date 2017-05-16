@@ -92,7 +92,7 @@ public class CategoryService {
      * @param parentId
      * @return
      */
-    private HqlArgs genHqlArgs(String param, String parentId) {
+    private HqlArgs genHqlArgs(String param, String parentId,Category.CategoryType categoryType) {
         param = StringUtils.trimToEmpty(param);
 
         Map<String, Object> args = new HashMap<String, Object>();
@@ -117,8 +117,8 @@ public class CategoryService {
      * @param param
      * @return
      */
-    public int getResultSize(String param, String parentId) {
-        HqlArgs hqlArgs = genHqlArgs(param, parentId);
+    public int getResultSize(String param, String parentId,Category.CategoryType categoryType) {
+        HqlArgs hqlArgs = genHqlArgs(param, parentId,categoryType);
         return categoryDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs()).size();
     }
 
@@ -131,8 +131,8 @@ public class CategoryService {
      * @param length
      * @return
      */
-    public List<Category> getResultInfos(String param, String parentId, Integer startIndex, Integer length) {
-        HqlArgs hqlArgs = genHqlArgs(param, parentId);
+    public List<Category> getResultInfos(String param, String parentId, Integer startIndex, Integer length,Category.CategoryType categoryType) {
+        HqlArgs hqlArgs = genHqlArgs(param, parentId,categoryType);
         String hql = "select c " + hqlArgs.getHql() + " order by c.sort desc,createTime desc";
         return categoryDao.findByNamedParam(hql, startIndex, length, hqlArgs.getArgs());
     }
@@ -143,9 +143,9 @@ public class CategoryService {
      * @param userId
      * @return
      */
-    public List<Category> getCategoryListByUser(String userId) {
-        String hql = "FROM Category WHERE creator.id = ? AND state <> -1 ORDER BY createTime DESC";
-        List<Category> categories = categoryDao.find(hql, userId);
+    public List<Category> getCategoryListByUser(String userId,Category.CategoryType categoryType) {
+        String hql = "FROM Category WHERE creator.id = ? AND categoryType=? AND state <> -1 ORDER BY createTime DESC";
+        List<Category> categories = categoryDao.find(hql, userId,categoryType);
         return categories;
     }
 
@@ -155,8 +155,8 @@ public class CategoryService {
      *
      * @return
      */
-    public List<Map<String, Object>> getPubCategoryList() {
-        List<Map<String, Object>> pubCategoryList = categoryDao.getPubCategoryList();
+    public List<Map<String, Object>> getPubCategoryList(Category.CategoryType categoryType) {
+        List<Map<String, Object>> pubCategoryList = categoryDao.getPubCategoryList(categoryType);
         return pubCategoryList;
     }
 }

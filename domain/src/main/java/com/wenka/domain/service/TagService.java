@@ -17,6 +17,7 @@ public class TagService {
     @Autowired
     private TagDao tagDao;
 
+    @Autowired
     private LogService logService;
 
     /**

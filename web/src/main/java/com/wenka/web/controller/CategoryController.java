@@ -67,11 +67,12 @@ public class CategoryController extends BaseController {
     public Pagination list(@RequestParam(required = false) String param,
                            @RequestParam(required = false) String parentId,
                            @RequestParam(required = false) Integer page,
-                           @RequestParam(required = false) Integer length) {
+                           @RequestParam(required = false) Integer length,
+                           @RequestParam(required = false) Category.CategoryType categoryType ){
         Pagination<Category> pagination = new Pagination<Category>(page, length);
         Integer startIdx = pagination.getStartIdx();
-        pagination.setCount(categoryService.getResultSize(param, parentId));
-        pagination.setRecords(categoryService.getResultInfos(param, parentId, startIdx, length));
+        pagination.setCount(categoryService.getResultSize(param, parentId,categoryType));
+        pagination.setRecords(categoryService.getResultInfos(param, parentId, startIdx, length,categoryType));
         return pagination;
     }
 
@@ -82,12 +83,16 @@ public class CategoryController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/getByUser",method = RequestMethod.GET)
-    public List<Category> getListByUser(@RequestParam(required = false) String userId) {
+    public List<Category> getListByUser(@RequestParam(required = false) String userId,
+                                        @RequestParam(required = false) Category.CategoryType categoryType) {
         userId = StringUtils.trimToEmpty(userId);
         if (StringUtils.isBlank(userId)){
             userId = this.currentUserId;
         }
-        List<Category> categoryListByUser = categoryService.getCategoryListByUser(userId);
+        if (categoryType == null){
+            categoryType = Category.CategoryType.文章类别;
+        }
+        List<Category> categoryListByUser = categoryService.getCategoryListByUser(userId,categoryType);
         return categoryListByUser;
     }
 }

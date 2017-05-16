@@ -24,7 +24,7 @@ public class Category extends AbstractVersionEntity {
     }
 
     public enum CategoryType {
-        类别, 栏目
+        文章类别, 附件类别
     }
 
     @ManyToOne
@@ -34,6 +34,8 @@ public class Category extends AbstractVersionEntity {
     @ManyToOne
     private Attachment portrait;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "category_type", nullable = false)
     private CategoryType categoryType;
 
     @ManyToOne(cascade = CascadeType.ALL)

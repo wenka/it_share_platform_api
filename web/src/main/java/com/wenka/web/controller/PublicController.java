@@ -7,6 +7,7 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import com.wenka.commons.util.RandomCode;
 import com.wenka.commons.web.AuthNotRequired;
+import com.wenka.domain.model.Category;
 import com.wenka.domain.model.Post;
 import com.wenka.domain.model.User;
 import com.wenka.domain.service.CategoryService;
@@ -133,8 +134,11 @@ public class PublicController {
      * @return
      */
     @RequestMapping(value = "/categoryList", method = RequestMethod.GET)
-    public List<Map<String, Object>> getPubCategortList() {
-        List<Map<String, Object>> pubCategoryList = categoryService.getPubCategoryList();
+    public List<Map<String, Object>> getPubCategortList(@RequestParam(required = false)Category.CategoryType categoryType) {
+        if (categoryType == null){
+            categoryType = Category.CategoryType.文章类别;
+        }
+        List<Map<String, Object>> pubCategoryList = categoryService.getPubCategoryList(categoryType);
         return pubCategoryList;
     }
 
