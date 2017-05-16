@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +86,7 @@ public class UserDynamicService {
 
         Map<String, Object> args = new HashMap<String, Object>();
 
-        String hql = " FROM UserDynamic ud WHERE 1=1 AND ud.user.id = :userId";
+        String hql = " FROM UserDynamic ud WHERE 1=1 AND ud.owner.id = :userId";
         args.put("userId", userId);
 
         if (states != null && states.size() > 0) {

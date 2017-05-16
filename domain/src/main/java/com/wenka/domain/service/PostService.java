@@ -4,6 +4,7 @@ import com.wenka.domain.dao.PostDao;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.model.HqlArgs;
 import com.wenka.domain.model.Post;
+import com.wenka.domain.model.UserDynamic;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class PostService {
     @Autowired
     private PostTagService postTagService;
 
+    @Autowired
+    private UserDynamicService userDynamicService;
+
     /**
      * 新增修改文章
      *
@@ -51,6 +55,13 @@ public class PostService {
             if (parent != null){
                 Post _post = postDao.get(parent.getId());
                 post.setParent(_post);
+
+                //保存文章主人的动态
+                UserDynamic userDynamic = new UserDynamic();
+                userDynamic.setOwner(_post.getCreator());
+                userDynamic.setPost(_post);
+                userDynamic.setMsg(post.getCreatorName() + "评论了您的" + post.getPostType());
+                userDynamicService.save(userDynamic);
             }
         }
 

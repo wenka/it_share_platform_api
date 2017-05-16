@@ -66,7 +66,7 @@ public class UserDynamicController extends BaseController {
     @RequestMapping(value = "/unread",method = RequestMethod.GET)
     public long getUnreadMsg(@RequestParam(required = false) String userId,
                              @RequestParam(required = false) String param) {
-        if (StringUtils.isNotBlank(StringUtils.trimToNull(userId))) {
+        if (StringUtils.isBlank(StringUtils.trimToNull(userId))) {
             userId = this.currentUserId;
         }
 
@@ -88,7 +88,7 @@ public class UserDynamicController extends BaseController {
     public List<UserDynamic> getList(@RequestParam(required = false) String userId,
                                      @RequestParam(required = false) List<Integer> states,
                                      @RequestParam(required = false) String param) {
-        if (StringUtils.isNotBlank(StringUtils.trimToNull(userId))) {
+        if (StringUtils.isBlank(StringUtils.trimToNull(userId))) {
             userId = this.currentUserId;
         }
         List<UserDynamic> list = this.userDynamicService.list(userId, states, param);
