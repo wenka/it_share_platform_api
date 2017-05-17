@@ -23,6 +23,8 @@ import javax.servlet.ServletContext;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 
 /**
@@ -132,5 +134,53 @@ public class AttachmentController extends BaseController {
         }
 
         return flag;
+    }
+
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public Attachment upload(MultipartHttpServletRequest request) throws UnsupportedEncodingException {
+        String thumbPath = StringUtils.stripEnd(this.uploads_dir, "/") + "/thumb";
+        File ufd = new File(this.uploads_dir);
+        File tfd = new File(thumbPath);
+        if (!ufd.exists()) {
+            ufd.mkdirs();
+        }
+
+        if (!tfd.exists()) {
+            tfd.mkdirs();
+        }
+
+
+        MultipartFile file = request.getFile("file");
+        if (file != null){
+            String contentType = file.getContentType();
+            String originalFilename = file.getOriginalFilename();
+
+            String ext = StringUtils.trimToEmpty(FilenameUtils.getExtension(originalFilename));
+            String[] ext_t = StringUtils.split(ext, "?");
+            if (ext_t != null && ext_t.length > 1) {
+                ext = ext_t[0];
+            }
+            String newFileName = UUID.randomUUID().toString()  + "." + ext;
+
+            File newFile;
+            try {
+                newFile = new File(this.uploads_dir, newFileName);
+                FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Attachment attachment = new Attachment();
+
+            attachment.setRealName(newFileName);
+            attachment.setContentType(contentType);
+            attachment.setOriginalName(URLDecoder.decode(originalFilename,"utf-8"));
+
+            attachmentService.save(attachment);
+
+            return attachment;
+        }
+
+        return null;
     }
 }
