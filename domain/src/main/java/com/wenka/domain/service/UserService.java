@@ -3,6 +3,7 @@ package com.wenka.domain.service;
 import com.wenka.commons.util.PinYinUtil;
 import com.wenka.commons.util.SecureCoder;
 import com.wenka.domain.dao.UserDao;
+import com.wenka.domain.model.Attachment;
 import com.wenka.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
@@ -30,6 +31,9 @@ public class UserService {
     @Autowired
     private LogService logService;
 
+    @Autowired
+    private AttachmentService attachmentService;
+
     /**
      * 获取用户
      *
@@ -51,6 +55,24 @@ public class UserService {
         user.setSpell(firstSpell);
         userDao.saveOrUpdate(user);
         logService.save("资料修改生成", user);
+    }
+
+    /**
+     * 更新用户头像
+     *
+     * @param user
+     */
+    public void updateAttachment(User user) {
+        String userId = user.getId();
+        User _user = userDao.get(userId);
+
+        Attachment attachment = user.getAttachment();
+        if (attachment != null) {
+            String id = attachment.getId();
+            Attachment _attachment = attachmentService.get(id);
+            _user.setAttachment(_attachment);
+            userDao.update(_user);
+        }
     }
 
     /**

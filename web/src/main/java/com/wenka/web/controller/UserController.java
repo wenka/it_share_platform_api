@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @Value("${token.timeout}")
+    //    @Value("${token.timeout}")
     private String tokenTimeout = "14400";
 
     /**
@@ -136,16 +136,26 @@ public class UserController {
                            @RequestParam(required = true) String password) {
         String pswd = StringUtils.trimToNull(password);
 
-        if (StringUtils.isBlank(pswd)){
+        if (StringUtils.isBlank(pswd)) {
             throw new RuntimeException("密码不能为空");
         }
-        this.userService.updatePswd(id,pswd);
+        this.userService.updatePswd(id, pswd);
     }
 
     @AuthNotRequired
-    @RequestMapping(value = "/existed/{username}",method = RequestMethod.GET)
-    public Boolean existed(@PathVariable String username){
+    @RequestMapping(value = "/existed/{username}", method = RequestMethod.GET)
+    public Boolean existed(@PathVariable String username) {
         Boolean exist = userService.exist(username);
         return exist;
+    }
+
+    /**
+     * 更新用户头像
+     *
+     * @param user
+     */
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public void updateAttachment(@RequestBody User user) {
+        this.userService.updateAttachment(user);
     }
 }

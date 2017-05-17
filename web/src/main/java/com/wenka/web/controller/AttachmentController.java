@@ -32,8 +32,8 @@ import java.util.*;
 public class AttachmentController extends BaseController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Value("${upload.save.dir}")
-    private String uploads_dir;
+//    @Value("${upload.save.dir}")
+    private String uploads_dir = "g:/it_demo/doc";
     @Autowired
     private AttachmentService attachmentService;
     @Autowired
@@ -107,6 +107,7 @@ public class AttachmentController extends BaseController {
                 var22.setContentType((String) fileTypes.get(var21));
                 var22.setRealName((String) fileNames.get(var21));
                 this.attachmentService.save(var22);
+                var20.add(var22);
             }
 
             return var20;

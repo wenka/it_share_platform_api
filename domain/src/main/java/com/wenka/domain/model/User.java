@@ -60,6 +60,9 @@ public class User extends AbstractVersionEntity {
     @JoinColumn(name = "attachment_id")
     private Attachment attachment; //头像
 
+    @Transient
+    private String attactmentSrc;
+
     public String getAccount() {
         return account;
     }
@@ -162,6 +165,15 @@ public class User extends AbstractVersionEntity {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+
+    public String getAttactmentSrc() {
+        return this.attachment != null ? this.attachment.getRealName() : this.attactmentSrc;
+    }
+
+    public void setAttactmentSrc(String attactmentSrc) {
+        this.attactmentSrc = attactmentSrc;
     }
 
 }
