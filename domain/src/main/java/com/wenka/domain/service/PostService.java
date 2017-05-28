@@ -282,9 +282,17 @@ public class PostService {
         Post post = this.postDao.get(id);
         post.setAdoption(true);
         this.postDao.update(post);
+        if (post.getPostType() == Post.PostType.评论){
+            UserDynamic userDynamic = new UserDynamic();
+            userDynamic.setMsg(post.getTagNames() + "评论采纳成功");
+            userDynamic.setPost(post);
+            userDynamic.setOwner(post.getCreator());
+            this.userDynamicService.save(userDynamic);
+        }
 
         if (post.getParentId() != null){
             this.updateAdoption(post.getParentId());
+            logService.save(post.getPostType().toString() + "：[" + post.getTitle() + "]已采纳",post.getParent().getCreator());
         }
     }
 }
