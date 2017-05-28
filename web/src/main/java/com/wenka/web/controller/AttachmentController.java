@@ -1,5 +1,7 @@
 package com.wenka.web.controller;
 
+import com.wenka.commons.util.FileUtil;
+import com.wenka.commons.web.AuthNotRequired;
 import com.wenka.domain.model.Attachment;
 import com.wenka.domain.service.AttachmentService;
 import net.coobird.thumbnailator.Thumbnails;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -136,7 +140,7 @@ public class AttachmentController extends BaseController {
         return flag;
     }
 
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public Attachment upload(MultipartHttpServletRequest request) throws UnsupportedEncodingException {
         String thumbPath = StringUtils.stripEnd(this.uploads_dir, "/") + "/thumb";
         File ufd = new File(this.uploads_dir);
@@ -151,16 +155,16 @@ public class AttachmentController extends BaseController {
 
 
         MultipartFile file = request.getFile("file");
-        if (file != null){
+        if (file != null) {
             String contentType = file.getContentType();
-            String originalFilename = new String(file.getOriginalFilename().getBytes(),"UTF-8");
+            String originalFilename = new String(file.getOriginalFilename().getBytes(), "UTF-8");
 
             String ext = StringUtils.trimToEmpty(FilenameUtils.getExtension(originalFilename));
             String[] ext_t = StringUtils.split(ext, "?");
             if (ext_t != null && ext_t.length > 1) {
                 ext = ext_t[0];
             }
-            String newFileName = UUID.randomUUID().toString()  + "." + ext;
+            String newFileName = UUID.randomUUID().toString() + "." + ext;
 
             File newFile;
             try {
@@ -174,7 +178,7 @@ public class AttachmentController extends BaseController {
 
             attachment.setRealName(newFileName);
             attachment.setContentType(contentType);
-            attachment.setOriginalName(URLDecoder.decode(originalFilename,"utf-8"));
+            attachment.setOriginalName(URLDecoder.decode(originalFilename, "utf-8"));
 
             attachmentService.save(attachment);
 
@@ -182,5 +186,22 @@ public class AttachmentController extends BaseController {
         }
 
         return null;
+    }
+
+    /**
+     * 下载图片
+     *
+     * @param id
+     * @param response
+     */
+    @AuthNotRequired
+    @RequestMapping("/download/{id}")
+    public void download(@PathVariable  String id, HttpServletResponse response) {
+        Attachment attachment = attachmentService.get(id);
+        String contentType = attachment.getContentType();
+        String originalName = attachment.getOriginalName();
+        String realName = attachment.getRealName();
+
+        FileUtil.download(response, uploads_dir, realName, originalName, contentType);
     }
 }

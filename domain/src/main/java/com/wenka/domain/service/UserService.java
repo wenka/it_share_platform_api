@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -247,4 +248,18 @@ public class UserService {
         user.setPassword(password);
         this.userDao.update(user);
     }
+
+    /**
+     * 修改用户积分
+     *
+     * @param id
+     * @param num 更新的积分 取正负值
+     */
+    public void updateUserIntegral(String id, BigInteger num) {
+        User user = this.userDao.get(id);
+        BigInteger integral1 = user.getIntegral();
+        user.setIntegral(integral1.add(num));
+        this.userDao.update(user);
+    }
+
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.UUID;
 
 /**
@@ -26,7 +28,7 @@ public class UserController {
     private UserService userService;
 
     @Value("${token.timeout}")
-    private String tokenTimeout ;
+    private String tokenTimeout;
 
     /**
      * 新增或者修改用户

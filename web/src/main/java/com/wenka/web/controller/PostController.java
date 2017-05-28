@@ -51,7 +51,7 @@ public class PostController extends BaseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Post get(@PathVariable String id) {
         //增加阅读量
-        postService.updateViwCount(id,this.currentUserId);
+        postService.updateViwCount(id, this.currentUserId);
         return postService.get(id);
     }
 
@@ -122,5 +122,15 @@ public class PostController extends BaseController {
         }
         long listSize = postService.getListSize(postType, param, categoryIds, states, userId);
         return listSize;
+    }
+
+    /**
+     * 采纳
+     *
+     * @param id
+     */
+    @RequestMapping(value = "/adoption/{id}", method = RequestMethod.POST)
+    public void adoption(@PathVariable String id) {
+        this.postService.updateAdoption(id);
     }
 }

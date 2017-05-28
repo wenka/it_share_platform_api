@@ -5,7 +5,7 @@ import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
-import com.wenka.commons.util.RandomCode;
+import com.wenka.commons.util.SecurityCode;
 import com.wenka.commons.web.AuthNotRequired;
 import com.wenka.domain.model.Category;
 import com.wenka.domain.model.Post;
@@ -63,14 +63,14 @@ public class PublicController {
 
         Map<String, Object> args = new HashMap<String, Object>();
 
-        String code = RandomCode.getRandomCode();
+        String securityCode = SecurityCode.getSecurityCode();
 
         //发送手机验证码
         TaobaoClient client = new DefaultTaobaoClient(reqUrl, appKey, appSecret);
         AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
         req.setSmsType(smsType);
         req.setSmsFreeSignName(smsFreeSignName);
-        req.setSmsParamString("{code:'" + code + "'}");
+        req.setSmsParamString("{code:'" + securityCode + "'}");
         req.setRecNum(tel);
         req.setSmsTemplateCode(smsTemplateCode);
 
@@ -81,7 +81,7 @@ public class PublicController {
             throw new RuntimeException(e);
         }
 
-        args.put("code", code);
+        args.put("code", securityCode);
         args.put("response", response);
         return args;
     }

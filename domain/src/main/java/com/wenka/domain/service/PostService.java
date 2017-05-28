@@ -7,6 +7,7 @@ import com.wenka.domain.model.Post;
 import com.wenka.domain.model.UserDynamic;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -35,6 +36,15 @@ public class PostService {
     @Autowired
     private UserDynamicService userDynamicService;
 
+    @Value("${limitContextLength}")
+    private String limitContextLength;
+
+    @Value("${integral.rate}")
+    private String integralRate;
+
+    @Autowired
+    private UserService userService;
+
     /**
      * 新增修改文章
      *
@@ -42,7 +52,7 @@ public class PostService {
      */
     public void saveOrUpdate(Post post) {
 
-        if(post.getPostType() != Post.PostType.评论){
+        if (post.getPostType() != Post.PostType.评论) {
             Category category = post.getCategory();
             if (category != null) {
                 Category _category = categoryService.get(category.getId());
@@ -50,9 +60,9 @@ public class PostService {
             } else {
                 throw new RuntimeException("请选择文章类别");
             }
-        }else if (post.getPostType() == Post.PostType.评论){
+        } else if (post.getPostType() == Post.PostType.评论) {
             Post parent = post.getParent();
-            if (parent != null){
+            if (parent != null) {
                 Post _post = postDao.get(parent.getId());
                 post.setParent(_post);
 
@@ -71,6 +81,26 @@ public class PostService {
         postDao.saveOrUpdate(post);
         postTagService.save(post);
 
+        if (post.getPostType() == Post.PostType.博客 || post.getPostType() == Post.PostType.头条) {
+            this.updateIntegral(post);
+        }
+
+    }
+
+    /**
+     * 计算用户积分
+     *
+     * @param post
+     */
+    private void updateIntegral(Post post) {
+        String content = post.getContent();
+        if (content != null) {
+            BigInteger contextlength = BigInteger.valueOf(content.length());
+            BigInteger limitLength = BigInteger.valueOf(Integer.valueOf(limitContextLength));
+            BigInteger rate = BigInteger.valueOf(Integer.valueOf(integralRate));
+            BigInteger num = contextlength.divide(limitLength).multiply(rate);
+            this.userService.updateUserIntegral(post.getCreatorId(), num);
+        }
     }
 
     /**
@@ -243,5 +273,18 @@ public class PostService {
     public List<Map<String, Object>> getPopularAuthor() {
         List<Map<String, Object>> popularAuthor = this.postDao.getPopularAuthor();
         return popularAuthor;
+    }
+
+    /**
+     * 采纳答案
+     */
+    public void updateAdoption(String id) {
+        Post post = this.postDao.get(id);
+        post.setAdoption(true);
+        this.postDao.update(post);
+
+        if (post.getParentId() != null){
+            this.updateAdoption(post.getParentId());
+        }
     }
 }
