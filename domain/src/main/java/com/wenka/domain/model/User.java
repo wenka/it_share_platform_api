@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -51,10 +52,29 @@ public class User extends AbstractVersionEntity {
     @Column(name = "remark")
     private String remark; //备注
 
-    public enum Gender{
-        male,female,none
+    public BigInteger getIntegral() {
+        return integral;
     }
+
+    public void setIntegral(BigInteger integral) {
+        this.integral = integral;
+    }
+
+    public boolean isCheckMail() {
+        return checkMail;
+    }
+
+    public void setCheckMail(boolean checkMail) {
+        this.checkMail = checkMail;
+    }
+
+    public enum Gender {
+        male, female, none
+    }
+
     private Gender gender; //性别
+
+    private BigInteger integral = BigInteger.ZERO;//用户积分
 
     @OneToOne
     @JoinColumn(name = "attachment_id")
@@ -62,6 +82,9 @@ public class User extends AbstractVersionEntity {
 
     @Transient
     private String attactmentSrc;
+
+    @Column(name = "check_mail")
+    private boolean checkMail;//是否验证了邮箱
 
     public String getAccount() {
         return account;

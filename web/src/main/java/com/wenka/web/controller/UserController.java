@@ -25,8 +25,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //    @Value("${token.timeout}")
-    private String tokenTimeout = "14400";
+    @Value("${token.timeout}")
+    private String tokenTimeout ;
 
     /**
      * 新增或者修改用户

@@ -31,23 +31,23 @@ import java.util.Map;
 @RequestMapping("/pub")
 public class PublicController {
 
-    //    @Value("${taobao.appKey}")
-    private String appKey = "23554880";
+    @Value("${taobao.appKey}")
+    private String appKey;
 
-    //    @Value("${taobao.appSecret}")
-    private String appSecret = "c3ad75ff1e00b7d36830da0884ee16d7";
+    @Value("${taobao.appSecret}")
+    private String appSecret;
 
-    //    @Value("${taobao.reqUrl}")
-    private String reqUrl = "http://gw.api.taobao.com/router/rest";
+    @Value("${taobao.reqUrl}")
+    private String reqUrl;
 
-    //    @Value("${smsFreeSignName}")
-    private String smsFreeSignName = "文卡";
+    @Value("${taobao.smsFreeSignName}")
+    private String smsFreeSignName;
 
-    //    @Value("${smsTemplateCode}")
-    private String smsTemplateCode = "SMS_32750063";
+    @Value("${taobao.smsTemplateCode}")
+    private String smsTemplateCode;
 
-    //    @Value("${smsType}")
-    private String smsType = "normal";
+    @Value("${taobao.smsType}")
+    private String smsType;
 
     @Autowired
     private UserService userService;
@@ -134,8 +134,8 @@ public class PublicController {
      * @return
      */
     @RequestMapping(value = "/categoryList", method = RequestMethod.GET)
-    public List<Map<String, Object>> getPubCategortList(@RequestParam(required = false)Category.CategoryType categoryType) {
-        if (categoryType == null){
+    public List<Map<String, Object>> getPubCategortList(@RequestParam(required = false) Category.CategoryType categoryType) {
+        if (categoryType == null) {
             categoryType = Category.CategoryType.文章类别;
         }
         List<Map<String, Object>> pubCategoryList = categoryService.getPubCategoryList(categoryType);
@@ -159,7 +159,7 @@ public class PublicController {
 
         User byaccountAndTel = userService.getByaccountAndTel(account, tel);
 
-        if (byaccountAndTel == null){
+        if (byaccountAndTel == null) {
             throw new RuntimeException("该账户与此手机号不匹配");
         }
 

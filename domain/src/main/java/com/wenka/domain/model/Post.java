@@ -32,12 +32,12 @@ public class Post extends AbstractVersionEntity {
 
     public String getTagNames() {
         Set<String> tagNames = new HashSet<String>();
-        if (this.tags != null && this.tags.size() > 0){
-            for (Tag tag: tags){
+        if (this.tags != null && this.tags.size() > 0) {
+            for (Tag tag : tags) {
                 tagNames.add(tag.getName());
             }
         }
-        return StringUtils.join(tagNames,",");
+        return StringUtils.join(tagNames, ",");
     }
 
     public void setTagNames(String tagNames) {
@@ -46,8 +46,8 @@ public class Post extends AbstractVersionEntity {
 
     public Set<Tag> getTags() {
         Set<Tag> tagNames = new HashSet<Tag>();
-        if (postTags != null && postTags.size() > 0){
-            for (PostTag postTag: postTags){
+        if (postTags != null && postTags.size() > 0) {
+            for (PostTag postTag : postTags) {
                 tagNames.add(postTag.getTag());
             }
         }
@@ -58,9 +58,26 @@ public class Post extends AbstractVersionEntity {
         this.tags = tags;
     }
 
-    public enum PostType {
-        博客,头条,提问, 评论;
+    public BigInteger getIntegral() {
+        return integral;
     }
+
+    public void setIntegral(BigInteger integral) {
+        this.integral = integral;
+    }
+
+    public boolean isAdoption() {
+        return adoption;
+    }
+
+    public void setAdoption(boolean adoption) {
+        this.adoption = adoption;
+    }
+
+    public enum PostType {
+        博客, 头条, 提问, 评论;
+    }
+
     @Enumerated(value = EnumType.STRING)
     @Column(name = "post_type", nullable = false)
     private PostType postType;
@@ -85,6 +102,10 @@ public class Post extends AbstractVersionEntity {
     private String brief;//摘要
 
     private String content;
+
+    private BigInteger integral = BigInteger.ZERO;//积分
+
+    private boolean adoption;//是否采纳/支持
 
     @OneToMany(mappedBy = "parent")
     @OrderBy("create_time desc ")
@@ -267,6 +288,7 @@ public class Post extends AbstractVersionEntity {
 
     @Transient
     private String attachmentNames;
+
     public String getCategoryId() {
         return this.category == null ? this.categoryId : this.category.getId();
     }

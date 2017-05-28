@@ -34,8 +34,8 @@ import java.util.*;
 public class AttachmentController extends BaseController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-//    @Value("${upload.save.dir}")
-    private String uploads_dir = "g:/it_demo/doc";
+    @Value("${upload.save.dir}")
+    private String uploads_dir;
     @Autowired
     private AttachmentService attachmentService;
     @Autowired
@@ -153,7 +153,7 @@ public class AttachmentController extends BaseController {
         MultipartFile file = request.getFile("file");
         if (file != null){
             String contentType = file.getContentType();
-            String originalFilename = file.getOriginalFilename();
+            String originalFilename = new String(file.getOriginalFilename().getBytes(),"UTF-8");
 
             String ext = StringUtils.trimToEmpty(FilenameUtils.getExtension(originalFilename));
             String[] ext_t = StringUtils.split(ext, "?");
