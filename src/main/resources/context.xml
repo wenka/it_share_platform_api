@@ -145,4 +145,6 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 
+    <!-- 配置 Spring JavaMailSenderImpl-->
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"></bean>
 </beans>

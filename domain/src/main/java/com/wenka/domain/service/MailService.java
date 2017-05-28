@@ -1,7 +1,10 @@
 package com.wenka.domain.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,23 +35,26 @@ public class MailService {
     @Value("${mail.sendder}")
     private String mailSendder;
 
+    @Autowired
+    private JavaMailSenderImpl javaMailSender;
+
     /**
      * 获取消息发送对象
      *
      * @return
      */
-    @Transactional
-    private JavaMailSenderImpl createMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(mailHost);
-        mailSender.setPort(Integer.valueOf(mailPort));
-        mailSender.setUsername(mailUsername);
-        mailSender.setPassword(mailPassword);
-        Properties pt = new Properties();
-        pt.setProperty("mail.smtp.auth", "true");
-        mailSender.setJavaMailProperties(pt);
-        return mailSender;
-    }
+//    @Bean
+//    private JavaMailSenderImpl createMailSender() {
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        mailSender.setHost(mailHost);
+//        mailSender.setPort(Integer.valueOf(mailPort));
+//        mailSender.setUsername(mailUsername);
+//        mailSender.setPassword(mailPassword);
+//        Properties pt = new Properties();
+//        pt.setProperty("mail.smtp.auth", "true");
+//        mailSender.setJavaMailProperties(pt);
+//        return mailSender;
+//    }
 
     /**
      * 获取邮件
@@ -57,15 +63,21 @@ public class MailService {
      * @param subject 标题
      * @param text    内容
      */
-    @Transactional
+//    @Transactional
     public void sendMail(String to, String subject, String text) {
-        JavaMailSenderImpl mailSender = this.createMailSender();
+        javaMailSender.setHost(mailHost);
+        javaMailSender.setPort(Integer.valueOf(mailPort));
+        javaMailSender.setUsername(mailUsername);
+        javaMailSender.setPassword(mailPassword);
+        Properties pt = new Properties();
+        pt.setProperty("mail.smtp.auth", "true");
+        javaMailSender.setJavaMailProperties(pt);
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(mailSendder);
         msg.setTo(to);
         msg.setSubject(subject);
         msg.setText(text);
         msg.setSentDate(new Date());
-        mailSender.send(msg);
+        javaMailSender.send(msg);
     }
 }
