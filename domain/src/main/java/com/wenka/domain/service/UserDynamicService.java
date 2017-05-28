@@ -29,6 +29,9 @@ public class UserDynamicService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MailService mailService;
+
     /***
      * 保存
      * @param userDynamic
@@ -37,17 +40,22 @@ public class UserDynamicService {
         Post post = userDynamic.getPost();
         User owner = userDynamic.getOwner();
 
-        if (post != null){
+        if (post != null) {
             post = postService.get(post.getId());
         }
 
-        if (owner != null){
+        if (owner != null) {
             owner = userService.get(owner.getId());
         }
 
         userDynamic.setPost(post);
         userDynamic.setOwner(owner);
         userDynamicDao.save(userDynamic);
+
+        //发送邮件
+        if (owner.isCheckMail()){
+            mailService.sendMail(owner.getEmail(),"IT技术分享平台",userDynamic.getMsg());
+        }
     }
 
     /***
