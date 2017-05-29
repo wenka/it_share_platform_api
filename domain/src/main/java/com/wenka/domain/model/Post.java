@@ -74,6 +74,14 @@ public class Post extends AbstractVersionEntity {
         this.adoption = adoption;
     }
 
+    public EditorType getEditorType() {
+        return editorType;
+    }
+
+    public void setEditorType(EditorType editorType) {
+        this.editorType = editorType;
+    }
+
     public enum PostType {
         博客, 头条, 提问, 评论;
     }
@@ -106,6 +114,14 @@ public class Post extends AbstractVersionEntity {
     private BigInteger integral = BigInteger.ZERO;//积分
 
     private boolean adoption;//是否采纳/支持
+
+    public enum EditorType{
+        vueEditor,markdown,textarea
+    }
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "editor_type")
+    private EditorType editorType; // 编辑器类型
 
     @OneToMany(mappedBy = "parent")
     @OrderBy("create_time desc ")

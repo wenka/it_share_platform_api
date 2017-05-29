@@ -89,6 +89,7 @@ public class UserController {
                 token.setUid(user.getId());
                 if (rember) {
                     token.setTimeout(Integer.valueOf(this.tokenTimeout));
+//                    token.setTimeout(Integer.MAX_VALUE);
                 }
 
                 request.setAttribute("authToken", token);
