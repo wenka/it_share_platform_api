@@ -68,7 +68,7 @@ public class UserFansService {
                 args.put("currentUserId",currentUserId);
             } else if (direction.contains(RELATION_MY_FANS)) { //关注我的
                 hql += " AND uf.focus.id = :userId";
-                args.put("userId", userId);
+                args.put("userId", currentUserId);
             } else if (direction.contains(RELATION_IS_EXISTED)) { //查询关系是否存在
                 hql += " AND uf.owner.id = :currentUserId AND uf.focus.id = :userId";
                 args.put("currentUserId",currentUserId);

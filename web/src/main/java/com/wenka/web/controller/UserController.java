@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;
@@ -160,5 +160,10 @@ public class UserController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void updateAttachment(@RequestBody User user) {
         this.userService.updateAttachment(user);
+    }
+
+    @RequestMapping(value = "/updateTel/{tel}",method = RequestMethod.POST)
+    public void updateTel(@PathVariable String tel){
+        this.userService.updateTel(this.currentUserId,tel);
     }
 }

@@ -262,4 +262,15 @@ public class UserService {
         this.userDao.update(user);
     }
 
+    public void updateTel(String currentUserId, String tel) {
+
+        Boolean aBoolean = this.existTel(tel);
+        if (aBoolean){
+            throw new RuntimeException("此手机号已经注册");
+        }
+
+        User user = this.userDao.get(currentUserId);
+        user.setTel(tel);
+        this.userDao.update(user);
+    }
 }
