@@ -71,7 +71,7 @@ public class AttachmentBagService {
         }
     }
 
-    private HqlArgs getHqlArgs(String param, AttachmentBag.FileType fileType, String userId) {
+    private HqlArgs getHqlArgs(String param, AttachmentBag.FileType fileType, String userId, List<String> categoryIds) {
         param = StringUtils.trimToEmpty(param);
         userId = StringUtils.trimToEmpty(userId);
 
@@ -89,6 +89,17 @@ public class AttachmentBagService {
             args.put("userId", userId);
         }
 
+        if (categoryIds != null && categoryIds.size() > 0) {
+            if (categoryIds.size() == 1) {
+                hql += "ab.category.id = :categoryId";
+                args.put("categoryId", categoryIds.get(0));
+            } else {
+                hql += "ab.category.id in :categoryIds";
+                args.put("categoryIds", categoryIds);
+            }
+        }
+
+
         if (fileType != null) {
             hql += " AND ab.fileType = :fileType";
             args.put("fileType", fileType);
@@ -98,14 +109,14 @@ public class AttachmentBagService {
 
     }
 
-    public List<AttachmentBag> list(String param, AttachmentBag.FileType fileType, String userId){
-        HqlArgs hqlArgs = this.getHqlArgs(param, fileType, userId);
+    public List<AttachmentBag> list(String param, AttachmentBag.FileType fileType, String userId, List<String> categoryIds) {
+        HqlArgs hqlArgs = this.getHqlArgs(param, fileType, userId, categoryIds);
         String hql = hqlArgs.getHql() + " ORDER BY ab.createTime DESC";
-        return this.attachmentBagDao.findByNamedParam(hql,hqlArgs.getArgs());
+        return this.attachmentBagDao.findByNamedParam(hql, hqlArgs.getArgs());
     }
 
-    public long listSize(String param, AttachmentBag.FileType fileType, String userId){
-        HqlArgs hqlArgs = this.getHqlArgs(param, fileType, userId);
-        return this.attachmentBagDao.getCount(hqlArgs.getHql(),hqlArgs.getArgs());
+    public long listSize(String param, AttachmentBag.FileType fileType, String userId, List<String> categoryIds) {
+        HqlArgs hqlArgs = this.getHqlArgs(param, fileType, userId, categoryIds);
+        return this.attachmentBagDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
     }
 }
