@@ -1,5 +1,6 @@
 package com.wenka.web.controller;
 
+import com.wenka.commons.web.AuthNotRequired;
 import com.wenka.domain.model.AttachmentBag;
 import com.wenka.domain.service.AttachmentBagService;
 import org.apache.commons.lang3.StringUtils;
@@ -24,23 +25,27 @@ public class AttachmentBagController extends BaseController {
         this.attachmentBagService.save(attachmentBag);
     }
 
+    @AuthNotRequired
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<AttachmentBag> list(@RequestParam(required = false) String parm,
                                     @RequestParam(required = false) AttachmentBag.FileType fileType,
-                                    @RequestParam(required = false) String userId) {
+                                    @RequestParam(required = false) String userId,
+                                    @RequestParam(required = false) List<String> categoryIds) {
         if (StringUtils.isBlank(StringUtils.trimToEmpty(userId))) {
             userId = this.currentUserId;
         }
-        return this.attachmentBagService.list(parm, fileType, userId);
+        return this.attachmentBagService.list(parm, fileType, userId, categoryIds);
     }
 
+    @AuthNotRequired
     @RequestMapping(value = "/listSize", method = RequestMethod.GET)
     public long listSize(@RequestParam(required = false) String parm,
-                     @RequestParam(required = false) AttachmentBag.FileType fileType,
-                     @RequestParam(required = false) String userId) {
+                         @RequestParam(required = false) AttachmentBag.FileType fileType,
+                         @RequestParam(required = false) String userId,
+                         @RequestParam(required = false) List<String> categoryIds) {
         if (StringUtils.isBlank(StringUtils.trimToEmpty(userId))) {
             userId = this.currentUserId;
         }
-        return this.attachmentBagService.listSize(parm, fileType, userId);
+        return this.attachmentBagService.listSize(parm, fileType, userId, categoryIds);
     }
 }
