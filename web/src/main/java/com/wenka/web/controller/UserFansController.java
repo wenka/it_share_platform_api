@@ -27,6 +27,13 @@ public class UserFansController extends BaseController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public void save(@RequestBody User user) {
+        if (user != null && user.getId() != null) {
+            String id = user.getId();
+            if (id.equals(this.currentUserId)) {
+                throw new RuntimeException("不能关注自己");
+            }
+        }
+
         UserFans userFans = new UserFans();
         userFans.setOwner(this.currentUser);
         userFans.setFocus(user);
@@ -36,7 +43,7 @@ public class UserFansController extends BaseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable String id) {
-        userFansService.delete(id);
+        userFansService.delete2(this.currentUserId, id);
     }
 
     /**

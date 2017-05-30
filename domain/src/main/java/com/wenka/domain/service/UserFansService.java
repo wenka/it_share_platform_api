@@ -50,12 +50,32 @@ public class UserFansService {
      */
     public void delete(String id) {
         UserFans userFans = userFansDao.get(id);
-        this.logService.save("取消关注了" + userFans.getFocusName(),userFans.getOwner()
+        this.logService.save("取消关注了" + userFans.getFocusName(), userFans.getOwner()
         );
         this.userFansDao.delete(id);
     }
 
-    private HqlArgs getHqlArgs(String direction,String currentUserId, String userId) {
+
+    /***
+     * 删除关系
+     * @param currentUserId
+     * @param userId
+     */
+    public void delete2(String currentUserId, String userId) {
+        HqlArgs hqlArgs = this.getHqlArgs(RELATION_IS_EXISTED, currentUserId, userId);
+        List<UserFans> byNamedParam = this.userFansDao.findByNamedParam(hqlArgs.getHql(), hqlArgs.getArgs());
+        if (byNamedParam != null && byNamedParam.size() == 1){
+            UserFans userFans = byNamedParam.get(0);
+            this.logService.save("取消关注了" + userFans.getFocusName(), userFans.getOwner()
+            );
+            this.userFansDao.delete(userFans.getId());
+        }else
+        {
+            throw new RuntimeException("数据异常");
+        }
+    }
+
+    private HqlArgs getHqlArgs(String direction, String currentUserId, String userId) {
         direction = StringUtils.trimToEmpty(direction);
 
         Map<String, Object> args = new HashMap<String, Object>();
@@ -65,30 +85,31 @@ public class UserFansService {
         if (StringUtils.isNotBlank(direction)) {
             if (direction.contains(RELATION_MY_FOCUS)) { //我关注的
                 hql += " AND uf.owner.id = :currentUserId";
-                args.put("currentUserId",currentUserId);
+                args.put("currentUserId", currentUserId);
             } else if (direction.contains(RELATION_MY_FANS)) { //关注我的
                 hql += " AND uf.focus.id = :userId";
                 args.put("userId", currentUserId);
             } else if (direction.contains(RELATION_IS_EXISTED)) { //查询关系是否存在
                 hql += " AND uf.owner.id = :currentUserId AND uf.focus.id = :userId";
-                args.put("currentUserId",currentUserId);
+                args.put("currentUserId", currentUserId);
                 args.put("userId", userId);
             }
         }
 
-        return new HqlArgs(hql,args);
+        return new HqlArgs(hql, args);
     }
 
     /**
      * 查询 我关注的|关注我的 列表集合
+     *
      * @param direction
      * @param userId
      * @return
      */
-    public List<UserFans> getList(String direction,String currentUserId,String userId) {
-        HqlArgs hqlArgs = this.getHqlArgs(direction,currentUserId, userId);
+    public List<UserFans> getList(String direction, String currentUserId, String userId) {
+        HqlArgs hqlArgs = this.getHqlArgs(direction, currentUserId, userId);
         String hql = hqlArgs.getHql() + " ORDER BY uf.createTime DESC";
-        return userFansDao.findByNamedParam(hql,hqlArgs.getArgs());
+        return userFansDao.findByNamedParam(hql, hqlArgs.getArgs());
     }
 
     /***
@@ -97,17 +118,17 @@ public class UserFansService {
      * @param userId
      * @return
      */
-    public long getListSize(String direction,String currentUserId,String userId){
-        HqlArgs hqlArgs = this.getHqlArgs(direction,currentUserId, userId);
-        return userFansDao.getCount(hqlArgs.getHql(),hqlArgs.getArgs());
+    public long getListSize(String direction, String currentUserId, String userId) {
+        HqlArgs hqlArgs = this.getHqlArgs(direction, currentUserId, userId);
+        return userFansDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
     }
 
-    public boolean getUserFansIsExisted(String currentUserId,String userId){
+    public boolean getUserFansIsExisted(String currentUserId, String userId) {
         HqlArgs hqlArgs = this.getHqlArgs(RELATION_IS_EXISTED, currentUserId, userId);
         long count = userFansDao.getCount(hqlArgs.getHql(), hqlArgs.getArgs());
-        if (count == 0){
+        if (count == 0) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
