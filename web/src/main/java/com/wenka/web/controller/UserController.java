@@ -166,4 +166,14 @@ public class UserController extends BaseController{
     public void updateTel(@PathVariable String tel){
         this.userService.updateTel(this.currentUserId,tel);
     }
+
+    @RequestMapping(value = "/pay/{id}/{num}",method = RequestMethod.POST)
+    public void pay(@PathVariable String id ,@PathVariable BigDecimal num){
+
+        num = num.setScale(0, BigDecimal.ROUND_HALF_UP);
+        BigInteger _num = num.toBigInteger();
+
+        this.userService.updateUserIntegral(id,_num);
+        this.userService.updateUserIntegral(this.currentUserId,_num.multiply(BigInteger.valueOf(-1)));
+    }
 }

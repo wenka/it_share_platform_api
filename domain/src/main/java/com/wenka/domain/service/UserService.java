@@ -258,7 +258,11 @@ public class UserService {
     public void updateUserIntegral(String id, BigInteger num) {
         User user = this.userDao.get(id);
         BigInteger integral1 = user.getIntegral();
-        user.setIntegral(integral1.add(num));
+        integral1 = integral1.add(num);
+        if (integral1.intValue() < 0){
+            throw new RuntimeException("积分不足");
+        }
+        user.setIntegral(integral1);
         this.userDao.update(user);
     }
 

@@ -72,7 +72,7 @@ public class User extends AbstractVersionEntity {
         male, female, none
     }
 
-    private Gender gender; //性别
+    private Gender gender = Gender.none; //性别
 
     private BigInteger integral = BigInteger.ZERO;//用户积分
 

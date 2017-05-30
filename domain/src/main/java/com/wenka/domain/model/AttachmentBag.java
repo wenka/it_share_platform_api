@@ -53,7 +53,7 @@ public class AttachmentBag extends AbstractEntity {
     }
 
     public enum FileType {
-        文档, 源码, 视频;
+        文档, 源码, 视频
     }
 
     @Enumerated(value = EnumType.STRING)
